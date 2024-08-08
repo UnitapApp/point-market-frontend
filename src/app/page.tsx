@@ -4,9 +4,8 @@ import { Rubik_Mono_One } from "next/font/google"
 import PointNameInput from "./components/PointNameInput"
 import AddCondition from "./components/AddCondition"
 
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Chain } from "@/types"
-import AddedCondition from "./components/AddedCondition"
 import { isAddress } from "viem"
 
 import "./styles.scss"

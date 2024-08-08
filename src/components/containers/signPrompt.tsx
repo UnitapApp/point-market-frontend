@@ -1,26 +1,26 @@
-"use client";
+"use client"
 
-import Icon from "@/components/ui/Icon";
-import { useUserProfileContext } from "@/context/userProfile";
-import { checkUserExists, loginOrRegister, setWalletAPI } from "@/utils/api";
-import { useWalletAccount, useWalletNetwork } from "@/utils/wallet";
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import { useSignTypedData } from "wagmi";
-import { ClaimButton } from "@/components/ui/Button/button";
-import { WalletState } from "../../../components/containers/modals/ConnectWalletModal";
-import { Address, isAddressEqual } from "viem";
-import { AxiosError } from "axios";
-import { useWalletManagementContext } from "@/context/walletProvider";
+import Icon from "@/components/ui/Icon"
+import { useUserProfileContext } from "@/context/userProfile"
+import { checkUserExists, loginOrRegister, setWalletAPI } from "@/utils/api"
+import { useWalletAccount, useWalletNetwork } from "@/utils/wallet"
+import { FC, useCallback, useEffect, useRef, useState } from "react"
+import { useSignTypedData } from "wagmi"
+import { ClaimButton } from "@/components/ui/Button/button"
+import { WalletState } from "./modals/ConnectWalletModal"
+import { Address, isAddressEqual } from "viem"
+import { AxiosError } from "axios"
+import { useWalletManagementContext } from "@/context/walletProvider"
 
 const SignPrompt: FC<{
-  imageUrl: string;
-  label?: string;
-  loadingImage: string;
-  error: string;
-  setWalletState: (state: WalletState) => void;
-  setError: (error: string) => void;
-  setIsConnected: (connected: boolean) => void;
-  setAddModalState: (state: string) => void;
+  imageUrl: string
+  label?: string
+  loadingImage: string
+  error: string
+  setWalletState: (state: WalletState) => void
+  setError: (error: string) => void
+  setIsConnected: (connected: boolean) => void
+  setAddModalState: (state: string) => void
 }> = ({
   imageUrl,
   label,
@@ -31,26 +31,26 @@ const SignPrompt: FC<{
   setIsConnected,
   setAddModalState,
 }) => {
-  const { address } = useWalletAccount();
+  const { address } = useWalletAccount()
 
-  const { chain } = useWalletNetwork();
+  const { chain } = useWalletNetwork()
 
-  const chainId = chain?.id;
+  const chainId = chain?.id
 
-  const { userToken, userProfile, addNewWallet } = useUserProfileContext();
+  const { userToken, userProfile, addNewWallet } = useUserProfileContext()
 
-  const { duplicateWalletRaiseError } = useWalletManagementContext();
+  const { duplicateWalletRaiseError } = useWalletManagementContext()
 
-  const [now, setNow] = useState(new Date().toISOString());
+  const [now, setNow] = useState(new Date().toISOString())
 
   const [lastCheckDuplicateWallet, setLastCheckDuplicateWallet] =
-    useState<Address | null>(null);
+    useState<Address | null>(null)
 
-  const isMounted = useRef(false);
+  const isMounted = useRef(false)
 
   const onSuccess = useCallback(
     async (hashed: string) => {
-      if (!address || !userToken) return;
+      if (!address || !userToken) return
 
       const res = await setWalletAPI(
         userToken,
@@ -85,49 +85,49 @@ const SignPrompt: FC<{
           },
         }),
         hashed
-      );
+      )
 
-      addNewWallet(address, res.pk);
-      setAddModalState("complete");
+      addNewWallet(address, res.pk)
+      setAddModalState("complete")
     },
     [addNewWallet, address, chainId, now, setAddModalState, userToken]
-  );
+  )
 
-  const { isError, signTypedDataAsync, variables } = useSignTypedData({});
+  const { isError, signTypedDataAsync, variables } = useSignTypedData({})
 
   useEffect(() => {
-    if (!address) return;
+    if (!address) return
 
     if (
       userProfile?.wallets.find((item) =>
         isAddressEqual(item.address, address!)
       )
     ) {
-      setLastCheckDuplicateWallet(address);
-      return;
+      setLastCheckDuplicateWallet(address)
+      return
     }
 
     checkUserExists(address).then((res) => {
       if (res) {
         setError(
           "This wallet is already added to another account, please enter a different wallet"
-        );
+        )
       } else {
-        setLastCheckDuplicateWallet(address);
+        setLastCheckDuplicateWallet(address)
       }
-    });
-  }, [address, setError, userProfile?.wallets]);
+    })
+  }, [address, setError, userProfile?.wallets])
 
   useEffect(() => {
-    if (isMounted.current) return;
+    if (isMounted.current) return
 
-    if (!address) return;
+    if (!address) return
 
     if (
       !lastCheckDuplicateWallet ||
       !isAddressEqual(address, lastCheckDuplicateWallet)
     )
-      return;
+      return
 
     if (
       userProfile?.wallets.find((item) =>
@@ -137,12 +137,12 @@ const SignPrompt: FC<{
       if (duplicateWalletRaiseError) {
         setError(
           "This wallet is already added to your account, please enter a different wallet"
-        );
+        )
       } else {
-        setAddModalState("complete");
+        setAddModalState("complete")
       }
 
-      return;
+      return
     }
 
     signTypedDataAsync({
@@ -170,16 +170,16 @@ const SignPrompt: FC<{
       .then((res) => onSuccess(res))
       .catch((err) => {
         if (err instanceof AxiosError) {
-          const error = err.response?.data;
-          setError(error.address?.[0] ?? error.message?.[0] ?? err.message);
+          const error = err.response?.data
+          setError(error.address?.[0] ?? error.message?.[0] ?? err.message)
         } else {
-          setError(err.message);
+          setError(err.message)
         }
-      });
+      })
 
-    isMounted.current = true;
+    isMounted.current = true
 
-    return () => {};
+    return () => {}
   }, [
     address,
     chainId,
@@ -191,11 +191,11 @@ const SignPrompt: FC<{
     setError,
     signTypedDataAsync,
     userProfile?.wallets,
-  ]);
+  ])
 
   const isWalletDuplicateError = error.startsWith(
     "This wallet is already added"
-  );
+  )
 
   if (error)
     return (
@@ -215,10 +215,10 @@ const SignPrompt: FC<{
 
           <ClaimButton
             onClick={() => {
-              setIsConnected(false);
-              setNow(new Date().toISOString());
-              isMounted.current = false;
-              setError("");
+              setIsConnected(false)
+              setNow(new Date().toISOString())
+              isMounted.current = false
+              setError("")
             }}
             className="mx-auto !w-full mt-7"
           >
@@ -226,7 +226,7 @@ const SignPrompt: FC<{
           </ClaimButton>
         </div>
       </div>
-    );
+    )
 
   return (
     <div className="text-center">
@@ -247,7 +247,7 @@ const SignPrompt: FC<{
         process.
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default SignPrompt;
+export default SignPrompt

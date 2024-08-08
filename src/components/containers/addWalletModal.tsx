@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import Icon from "@/components/ui/Icon";
-import Modal from "@/components/ui/Modal/modal";
-import { useWalletManagementContext } from "@/context/walletProvider";
-import { WalletProviderButton } from "../../../components/containers/modals/ConnectWalletModal/walletPrompt";
-import { useWalletAccount, useWalletConnection } from "@/utils/wallet";
-import { useDisconnect } from "wagmi";
-import { FC, useEffect, useMemo, useState } from "react";
-import SignPrompt from "./signPrompt";
-import { WalletState } from "../../../components/containers/modals/ConnectWalletModal";
-import { useUserProfileContext } from "@/context/userProfile";
+import Icon from "@/components/ui/Icon"
+import Modal from "@/components/ui/Modal/modal"
+import { useWalletManagementContext } from "@/context/walletProvider"
+import { useWalletAccount, useWalletConnection } from "@/utils/wallet"
+import { useDisconnect } from "wagmi"
+import { FC, useEffect, useMemo, useState } from "react"
+import { useUserProfileContext } from "@/context/userProfile"
+import { WalletProviderButton } from "./modals/ConnectWalletModal/walletPrompt"
+import { WalletState } from "./modals/ConnectWalletModal"
+import SignPrompt from "./signPrompt"
 
 const AddWalletModal = () => {
   const {
@@ -17,15 +17,15 @@ const AddWalletModal = () => {
     setIsAddModalOpen,
     addModalState,
     duplicateWalletRaiseError,
-  } = useWalletManagementContext();
+  } = useWalletManagementContext()
 
-  const { setHoldUserLogout } = useUserProfileContext();
+  const { setHoldUserLogout } = useUserProfileContext()
 
   useEffect(() => {
-    if (isAddModalOpen) return;
+    if (isAddModalOpen) return
 
-    setHoldUserLogout(false);
-  }, [isAddModalOpen, setHoldUserLogout]);
+    setHoldUserLogout(false)
+  }, [isAddModalOpen, setHoldUserLogout])
 
   return (
     <Modal
@@ -44,20 +44,20 @@ const AddWalletModal = () => {
         )}
       </div>
     </Modal>
-  );
-};
+  )
+}
 
 export const AddWalletPrompt = () => {
-  const { connect, connectors, isSuccess } = useWalletConnection();
+  const { connect, connectors, isSuccess } = useWalletConnection()
 
-  const [isConnected, setIsConnected] = useState(false);
-  const { disconnect } = useDisconnect();
+  const [isConnected, setIsConnected] = useState(false)
+  const { disconnect } = useDisconnect()
 
   useEffect(() => {
-    setIsConnected(isSuccess);
-  }, [isSuccess]);
+    setIsConnected(isSuccess)
+  }, [isSuccess])
 
-  if (isConnected) return <WalletVerify setIsConnected={setIsConnected} />;
+  if (isConnected) return <WalletVerify setIsConnected={setIsConnected} />
 
   return (
     <>
@@ -73,12 +73,12 @@ export const AddWalletPrompt = () => {
         imageIcon="/assets/images/modal/metamask-icon.svg"
         backgroundImage="/assets/images/modal/metamask-bg.svg"
         onClick={() => {
-          disconnect();
+          disconnect()
           connect({
             connector: connectors.find(
               (connector) => connector.id === "injected"
             )!,
-          });
+          })
         }}
       />
       <WalletProviderButton
@@ -87,25 +87,25 @@ export const AddWalletPrompt = () => {
         backgroundImage="/assets/images/modal/walletconnect-bg.svg"
         imageIcon="/assets/images/modal/walletconnect-icon.svg"
         onClick={() => {
-          disconnect();
+          disconnect()
           connect({
             connector: connectors.find(
               (connector) => connector.id === "walletConnect"
             )!,
-          });
+          })
         }}
       />
     </>
-  );
-};
+  )
+}
 
 const WalletVerify: FC<{ setIsConnected: (arg: boolean) => void }> = ({
   setIsConnected,
 }) => {
-  const { address, connector } = useWalletAccount();
-  const [error, setError] = useState("");
-  const [walletState, setWalletState] = useState<WalletState>();
-  const { setAddModalState } = useWalletManagementContext();
+  const { address, connector } = useWalletAccount()
+  const [error, setError] = useState("")
+  const [walletState, setWalletState] = useState<WalletState>()
+  const { setAddModalState } = useWalletManagementContext()
 
   const currentWallet = useMemo(() => {
     if (connector?.id === "injected") {
@@ -113,15 +113,15 @@ const WalletVerify: FC<{ setIsConnected: (arg: boolean) => void }> = ({
         imageUrl: "/assets/images/modal/metamask-icon.svg",
         label: "Metamask",
         loadingImage: "/assets/images/modal/wallet-metamask-loading.svg",
-      };
+      }
     }
 
     return {
       imageUrl: "/assets/images/modal/walletconnect-icon.svg",
       label: "WalletConnect",
       loadingImage: "/assets/images/modal/wallet-connect-loading.svg",
-    };
-  }, [connector]);
+    }
+  }, [connector])
 
   return (
     <SignPrompt
@@ -134,11 +134,11 @@ const WalletVerify: FC<{ setIsConnected: (arg: boolean) => void }> = ({
       setError={setError}
       setIsConnected={setIsConnected}
     />
-  );
-};
+  )
+}
 
 const WalletAddSuccess = () => {
-  const { connector } = useWalletAccount();
+  const { connector } = useWalletAccount()
 
   const currentWallet = useMemo(() => {
     if (connector?.id === "injected") {
@@ -146,15 +146,15 @@ const WalletAddSuccess = () => {
         imageUrl: "/assets/images/modal/metamask-icon.svg",
         label: "Metamask",
         loadingImage: "/assets/images/modal/wallet-metamask-loading.svg",
-      };
+      }
     }
 
     return {
       imageUrl: "/assets/images/modal/walletconnect-icon.svg",
       label: "WalletConnect",
       loadingImage: "/assets/images/modal/wallet-connect-loading.svg",
-    };
-  }, [connector]);
+    }
+  }, [connector])
 
   return (
     <div className="w-full">
@@ -192,7 +192,7 @@ const WalletAddSuccess = () => {
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AddWalletModal;
+export default AddWalletModal
