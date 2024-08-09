@@ -154,7 +154,7 @@ const AddConditionModal = ({
           <div className=" relative">
             <AbiReader
               onChange={handleSetConditionData}
-              value={conditionData.abiObject}
+              value={conditionData.abi}
             />
             <div className="absolute -bottom-[14px] text-2xs text-error">
               {errorMessages.contractAddress}

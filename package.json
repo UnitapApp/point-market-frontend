@@ -36,6 +36,7 @@
     "react-markdown": "^9.0.0",
     "react-multi-date-picker": "^4.4.1",
     "react-qrcode-logo": "^2.9.0",
+    "react-toastify": "^10.0.5",
     "styled-components": "^6.1.0",
     "viem": "^2.7.16",
     "wagmi": "^2.5.7"

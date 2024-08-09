@@ -15,6 +15,9 @@ import { cookieToInitialState } from "wagmi"
 import { Providers } from "./providers"
 import AxiosApiManager from "@/components/axios-api-manager"
 import EventContextProvider from "@/context/eventProvider"
+import { ToastContainer } from "react-toastify"
+
+import "react-toastify/dist/ReactToastify.css"
 
 const notoSansFont = Noto_Sans({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -55,6 +58,7 @@ export default async function RootLayout({
           </UnitapProvider>
         </Providers>
 
+        <ToastContainer />
         <Progressbar />
 
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (

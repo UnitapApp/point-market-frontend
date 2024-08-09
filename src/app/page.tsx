@@ -11,6 +11,9 @@ import { isAddress } from "viem"
 import "./styles.scss"
 import { useGlobalContext } from "@/context/globalProvider"
 import { useWalletAccount } from "@/utils/wallet"
+import { useSignMessage } from "wagmi"
+import { makePointApi } from "@/utils/api/point-market"
+import { toast } from "react-toastify"
 
 const RubikMonoOne = Rubik_Mono_One({
   weight: ["400"],
@@ -23,14 +26,16 @@ export interface ConditionDataProps {
   nameOfPoint: string | null
   conditionName: string | null
   chain: Chain | null
-  abiObject: any | null
+  abi: any | null
   contractAddress: string | null
   numberOfPoints: number | null
   selectedMethod: string | null
+  paramsMask?: string[]
+  functionSignature?: string
 }
 
 const initialConditionData = {
-  abiObject: null,
+  abi: null,
   nameOfPoint: null,
   conditionName: null,
   chain: null,
@@ -44,10 +49,18 @@ const MainPage = () => {
   const [conditionData, setConditionData] =
     useState<ConditionDataProps>(initialConditionData)
 
+  const {
+    data: signMessageData,
+    error,
+    signMessage,
+    variables,
+    signMessageAsync,
+  } = useSignMessage()
+
   const [loading, setLoading] = useState(false)
 
   const { setIsWalletPromptOpen } = useGlobalContext()
-  const { isConnected } = useWalletAccount()
+  const { isConnected, address } = useWalletAccount()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -82,8 +95,37 @@ const MainPage = () => {
   }
 
   const handleSubmit = () => {
-    if (conditionList.length == 0) return
-    console.log(conditionList)
+    if (conditionList.length == 0 || !address) return
+
+    const message = JSON.stringify({
+      name,
+      modifiers: conditionList.map(
+        ({
+          abi,
+          conditionName,
+          selectedMethod,
+          paramsMask,
+          functionSignature,
+          numberOfPoints,
+          ...item
+        }) => ({
+          ...item,
+          chain: Number(item.chain?.chainId),
+          params_mask: paramsMask,
+          function_signature: functionSignature,
+          value: Number(numberOfPoints),
+          receiver: -1,
+        })
+      ),
+    })
+
+    signMessageAsync({
+      message,
+    }).then((res) => {
+      makePointApi(message, address, res).then(() =>
+        toast.success("Symbol created successfully")
+      )
+    })
   }
 
   return (
