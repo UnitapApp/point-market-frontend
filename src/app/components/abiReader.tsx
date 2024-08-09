@@ -32,10 +32,9 @@ const AbiReader: FC<{
 
   return (
     <label className="flex h-[43px] cursor-pointer items-center overflow-hidden rounded-xl border border-[#212130] bg-[#1E1E2C] pr-3 text-xs">
-      <p className="ml-5">Select files</p>
       <input
-        className="hidden"
         type="file"
+        className="pl-4 w-full"
         onChange={parseAbi}
         accept=".json"
       />

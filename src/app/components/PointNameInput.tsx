@@ -1,11 +1,12 @@
 "use client"
 import React, { useState } from "react"
-import { ConditionDataProps } from "../page"
+
 interface Props {
-  conditionData: ConditionDataProps
-  handleSetConditionData: (e: any) => void
+  name: string
+  setName: (value: string) => void
 }
-const PointNameInput = ({ conditionData, handleSetConditionData }: Props) => {
+
+const PointNameInput = ({ setName, name }: Props) => {
   const [isDisplayInput, setIsDisplayInput] = useState<boolean>(false)
 
   const handleDisplayInput = () => {
@@ -49,8 +50,8 @@ const PointNameInput = ({ conditionData, handleSetConditionData }: Props) => {
               placeholder="Unitap XP"
               name="nameOfPoint"
               className=" h-full w-full bg-[#1E1E2C] pl-2 text-xs font-normal leading-[16.34px] placeholder-gray80"
-              value={conditionData.nameOfPoint ?? ""}
-              onChange={handleSetConditionData}
+              value={name ?? ""}
+              onChange={(e) => setName(e.target.value)}
               type="text"
             />
           </div>

@@ -75,3 +75,7 @@ input {
   /* Firefox */
   -moz-appearance: textfield;
 }
+
+input::-webkit-file-upload-button {
+  display: none;
+}

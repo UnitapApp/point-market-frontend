@@ -1,34 +1,34 @@
-"use client";
+"use client"
 
-import Icon from "@/components/ui/Icon";
-import { useUserProfileContext } from "@/context/userProfile";
-import { useWalletAccount } from "@/utils/wallet";
-import { ConnectionProvider, getWalletProviderInfo } from ".";
-import { FC, useEffect } from "react";
-import { shortenAddress } from "@/utils";
-import { useGlobalContext } from "@/context/globalProvider";
+import Icon from "@/components/ui/Icon"
+import { useUserProfileContext } from "@/context/userProfile"
+import { useWalletAccount } from "@/utils/wallet"
+import { ConnectionProvider, getWalletProviderInfo } from "."
+import { FC, useEffect } from "react"
+import { shortenAddress } from "@/utils"
+import { useGlobalContext } from "@/context/globalProvider"
 
 const LoginSuccessBody: FC<{ isNewUser: boolean }> = ({ isNewUser }) => {
-  const { connector, address } = useWalletAccount();
+  const { connector, address } = useWalletAccount()
 
-  const { userProfile } = useUserProfileContext();
-  const { setIsWalletPromptOpen, isWalletPromptOpen } = useGlobalContext();
+  const { userProfile } = useUserProfileContext()
+  const { setIsWalletPromptOpen, isWalletPromptOpen } = useGlobalContext()
 
   const walletInfo = getWalletProviderInfo(
     connector?.id === "injected"
       ? ConnectionProvider.Metamask
       : ConnectionProvider.Walletconnect
-  );
+  )
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setIsWalletPromptOpen(false);
-    }, 3000);
+      setIsWalletPromptOpen(false)
+    }, 3000)
 
     return () => {
-      clearTimeout(timeout);
-    };
-  }, [setIsWalletPromptOpen]);
+      clearTimeout(timeout)
+    }
+  }, [setIsWalletPromptOpen])
 
   return (
     <div className="text-sm text-center w-full">
@@ -59,12 +59,8 @@ const LoginSuccessBody: FC<{ isNewUser: boolean }> = ({ isNewUser }) => {
         />
         Logged in Successfully!
       </div>
-      <p className="mt-2 mb-16 text-gray100">
-        Hii, {isNewUser ? "welcome" : "welcome back"} @
-        {userProfile?.username ?? shortenAddress(address)} :{")"}
-      </p>
     </div>
-  );
-};
+  )
+}
 
-export default LoginSuccessBody;
+export default LoginSuccessBody

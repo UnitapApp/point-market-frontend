@@ -10,6 +10,7 @@ import { isAddress } from "viem"
 
 import "./styles.scss"
 import { useGlobalContext } from "@/context/globalProvider"
+import { useWalletAccount } from "@/utils/wallet"
 
 const RubikMonoOne = Rubik_Mono_One({
   weight: ["400"],
@@ -39,10 +40,14 @@ const initialConditionData = {
 }
 
 const MainPage = () => {
+  const [name, setName] = useState("")
   const [conditionData, setConditionData] =
     useState<ConditionDataProps>(initialConditionData)
 
+  const [loading, setLoading] = useState(false)
+
   const { setIsWalletPromptOpen } = useGlobalContext()
+  const { isConnected } = useWalletAccount()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -60,7 +65,7 @@ const MainPage = () => {
     conditionData.chain &&
     conditionData.conditionName &&
     conditionData.contractAddress &&
-    conditionData.nameOfPoint &&
+    name &&
     conditionData.numberOfPoints &&
     conditionData.selectedMethod &&
     isAddress(conditionData.contractAddress!)
@@ -98,13 +103,10 @@ const MainPage = () => {
           </div>
         </div>
         <div className="flex min-h-[210px] w-full flex-col items-center">
-          <PointNameInput
-            conditionData={conditionData}
-            handleSetConditionData={handleSetConditionData}
-          />
+          <PointNameInput name={name} setName={setName} />
 
           <AddCondition
-            conditionData={conditionData}
+            conditionData={{ ...conditionData, nameOfPoint: name }}
             handleSetConditionData={handleSetConditionData}
             setConditionData={setConditionData}
             handleAddCondition={handleAddCondition}
@@ -116,13 +118,21 @@ const MainPage = () => {
             }
           />
         </div>
-
-        <div
-          className={`${conditionList.length > 0 && "cursor-pointer border border-space-green bg-dark-space-green text-space-green"} mb-5 flex h-[43px] w-full max-w-[452px] select-none items-center justify-center rounded-xl border-2 border-gray70 bg-gray50 text-center text-sm font-bold leading-5 text-gray80`}
-          onClick={handleSubmit}
-        >
-          Submit
-        </div>
+        {isConnected ? (
+          <button
+            className={`${conditionList.length > 0 && "cursor-pointer border border-space-green bg-dark-space-green text-space-green"} mb-5 flex py-3 w-full max-w-[452px] select-none items-center justify-center rounded-xl border-2 border-gray70 bg-gray50 text-center text-sm font-bold leading-5 text-gray80`}
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        ) : (
+          <button
+            onClick={setIsWalletPromptOpen.bind(null, true)}
+            className={`"cursor-pointer border border-space-green bg-dark-space-green text-space-green mb-5 flex py-3 w-full max-w-[452px] select-none items-center justify-center rounded-xl text-center text-sm font-bold leading-5`}
+          >
+            Connect Wallet
+          </button>
+        )}
       </div>
     </div>
   )
