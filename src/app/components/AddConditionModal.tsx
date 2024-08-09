@@ -1,9 +1,10 @@
-import Modal from "@/components/ui/Modal/modal"
 import React, { useEffect, useState } from "react"
 import { ConditionDataProps } from "../page"
-import ChainList from "./ChailList"
+import ChainList from "./ChainList"
 import { Address, isAddress } from "viem"
 import { getContractAbiApi } from "../helper/getContractAbi"
+import AbiReader from "./abiReader"
+import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react"
 
 interface ModalProps {
   isOpen: boolean
@@ -22,17 +23,6 @@ const AddConditionModal = ({
   setConditionData,
   handleAddCondition,
 }: ModalProps) => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-
-  const handleOpenModal = () => {
-    setIsModalOpen(!isModalOpen)
-    handleCloseModal()
-  }
-
-  useEffect(() => {
-    setIsModalOpen(isOpen)
-  }, [isOpen])
-
   const [showMethods, setShowMethods] = useState(false)
   const [setSelectedMethod, selectedMethod] = useState()
 
@@ -120,14 +110,16 @@ const AddConditionModal = ({
   }
 
   return (
-    <div className="" onClick={handleOpenModal}>
-      <Modal
-        title="Add Condition"
-        isOpen={isModalOpen}
-        closeModalHandler={handleOpenModal}
-        className={"provider-dashboard__modal"}
-      >
-        <div className="mt-5 flex flex-col gap-4 px-3">
+    <Modal
+      className="bg-gray20"
+      isOpen={isOpen}
+      onOpenChange={handleCloseModal}
+    >
+      <ModalContent>
+        <ModalHeader className="justify-center">
+          <div>Add Condition</div>
+        </ModalHeader>
+        <ModalBody className="flex flex-col gap-4 px-3">
           <div className="relative">
             <div className=" flex h-[43px] cursor-pointer items-center overflow-hidden rounded-xl border border-[#212130] bg-[#1E1E2C] pr-3 text-xs">
               <input
@@ -169,6 +161,15 @@ const AddConditionModal = ({
                 Paste
               </div>
             </div>
+            <div className="absolute -bottom-[14px] text-2xs text-error">
+              {errorMessages.contractAddress}
+            </div>
+          </div>
+          <div className=" relative">
+            <AbiReader
+              onChange={handleSetConditionData}
+              value={conditionData.abiObject}
+            />
             <div className="absolute -bottom-[14px] text-2xs text-error">
               {errorMessages.contractAddress}
             </div>
@@ -241,14 +242,14 @@ const AddConditionModal = ({
           </div>
           <button
             onClick={checkConditions}
-            className={`${!isCompleteConditionFiled && "opacity-50"} mt-28 flex h-[43px] w-full  items-center justify-center rounded-xl border border-[#2C6E59] bg-dark-space-green`}
+            className={`${!isCompleteConditionFiled && "opacity-50"} mt-5 flex h-[43px] w-full  items-center justify-center rounded-xl border border-[#2C6E59] bg-dark-space-green`}
             // disabled={!!isCompleteConditionFiled}
           >
             Add Condition
           </button>
-        </div>
-      </Modal>
-    </div>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   )
 }
 

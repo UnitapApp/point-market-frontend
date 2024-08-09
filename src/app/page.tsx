@@ -9,6 +9,7 @@ import { Chain } from "@/types"
 import { isAddress } from "viem"
 
 import "./styles.scss"
+import { useGlobalContext } from "@/context/globalProvider"
 
 const RubikMonoOne = Rubik_Mono_One({
   weight: ["400"],
@@ -21,12 +22,14 @@ export interface ConditionDataProps {
   nameOfPoint: string | null
   conditionName: string | null
   chain: Chain | null
+  abiObject: any | null
   contractAddress: string | null
   numberOfPoints: number | null
   selectedMethod: string | null
 }
 
 const initialConditionData = {
+  abiObject: null,
   nameOfPoint: null,
   conditionName: null,
   chain: null,
@@ -38,6 +41,8 @@ const initialConditionData = {
 const MainPage = () => {
   const [conditionData, setConditionData] =
     useState<ConditionDataProps>(initialConditionData)
+
+  const { setIsWalletPromptOpen } = useGlobalContext()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -111,6 +116,7 @@ const MainPage = () => {
             }
           />
         </div>
+
         <div
           className={`${conditionList.length > 0 && "cursor-pointer border border-space-green bg-dark-space-green text-space-green"} mb-5 flex h-[43px] w-full max-w-[452px] select-none items-center justify-center rounded-xl border-2 border-gray70 bg-gray50 text-center text-sm font-bold leading-5 text-gray80`}
           onClick={handleSubmit}

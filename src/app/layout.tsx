@@ -4,11 +4,6 @@ import { Noto_Sans } from "next/font/google"
 import UnitapProvider from "@/context"
 import Progressbar from "@/components/progress"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import {
-  ConnectBrightIdModal,
-  BrightConnectionModal,
-  CreateBrightIdAccountModal,
-} from "@/components/containers/modals"
 import StyledJsxRegistry from "@/components/styled-components"
 import { ConnectWalletModal } from "@/components/containers/modals/ConnectWalletModal"
 import GoogleAnalytics from "@/components/google-analytics"
@@ -54,9 +49,6 @@ export default async function RootLayout({
                 </div>
               </EventContextProvider>
 
-              <ConnectBrightIdModal />
-              <BrightConnectionModal />
-              <CreateBrightIdAccountModal />
               <ConnectWalletModal />
             </StyledJsxRegistry>
             <AxiosApiManager />

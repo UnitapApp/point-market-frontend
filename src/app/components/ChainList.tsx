@@ -1,76 +1,74 @@
-"use client";
+"use client"
 
-import Icon from "@/components/ui/Icon";
-import { useUserProfileContext } from "@/context/userProfile";
-import { Chain } from "@/types";
-import { useOutsideClick } from "@/utils/hooks/dom";
-import { getFaucetListServer } from "@/utils/serverApis";
-import { useWalletAccount } from "@/utils/wallet";
-import { SetStateAction, useEffect, useMemo, useRef, useState } from "react";
-import { ConditionDataProps } from "../page";
+import Icon from "@/components/ui/Icon"
+import { Chain } from "@/types"
+import { useOutsideClick } from "@/utils/hooks/dom"
+import { getFaucetListServer } from "@/utils/serverApis"
+import { useWalletAccount } from "@/utils/wallet"
+import { SetStateAction, useEffect, useMemo, useRef, useState } from "react"
+import { ConditionDataProps } from "../page"
 
 interface Props {
-  setConditionData: React.Dispatch<React.SetStateAction<ConditionDataProps>>;
-  conditionData: ConditionDataProps;
+  setConditionData: React.Dispatch<React.SetStateAction<ConditionDataProps>>
+  conditionData: ConditionDataProps
 }
 
 const ChainList = ({ setConditionData, conditionData }: Props) => {
-  const [chainList, setChainList] = useState<Chain[]>([]);
+  const [chainList, setChainList] = useState<Chain[]>([])
   const handleGetAllChains = async () => {
-    const chainsApi = await getFaucetListServer();
-    const chains = chainsApi as Array<Chain>;
-    setChainList(chains);
-  };
+    const chainsApi = await getFaucetListServer()
+    const chains = chainsApi as Array<Chain>
+    setChainList(chains)
+  }
 
   useEffect(() => {
-    handleGetAllChains();
-  }, []);
+    handleGetAllChains()
+  }, [])
 
-  const { address } = useWalletAccount();
-  const { userProfile } = useUserProfileContext();
-  const [selectedChain, setSelectedChain] = useState<any | null>(null);
-  const [chainName, setChainName] = useState<string>("");
-  const [searchPhrase, setSearchPhrase] = useState<string>("");
+  const { address } = useWalletAccount()
+  const [selectedChain, setSelectedChain] = useState<any | null>(null)
+  const [chainName, setChainName] = useState<string>("")
+  const [searchPhrase, setSearchPhrase] = useState<string>("")
 
   const handleSearchChain = (e: {
-    target: { value: SetStateAction<string> };
+    target: { value: SetStateAction<string> }
   }) => {
-    setChainName(e.target.value);
-    setSearchPhrase(e.target.value);
-  };
+    setChainName(e.target.value)
+    setSearchPhrase(e.target.value)
+  }
 
   const filterChainList = useMemo(() => {
     return chainList.filter((chain) =>
       chain.chainName
         .toLocaleLowerCase()
-        .includes(searchPhrase.toLocaleLowerCase()),
-    );
-  }, [chainList, searchPhrase]);
+        .includes(searchPhrase.toLocaleLowerCase())
+    )
+  }, [chainList, searchPhrase])
 
   const handleSelectChain = (chain: Chain) => {
-    setSelectedChain(chain);
-    setConditionData((prev) => ({ ...prev, chain: chain }));
-    setChainName(chain.chainName);
-    setSearchPhrase("");
-  };
+    setSelectedChain(chain)
+    setConditionData((prev) => ({ ...prev, chain: chain }))
+    setChainName(chain.chainName)
+    setSearchPhrase("")
+  }
 
   const handleSearch = (e: any) => {
-    setShowItems(true);
-    setConditionData((prev) => ({ ...prev, chain: null }));
-    handleSearchChain(e);
-  };
+    setShowItems(true)
+    setConditionData((prev) => ({ ...prev, chain: null }))
+    handleSearchChain(e)
+  }
 
-  const [showItems, setShowItems] = useState(false);
+  const [showItems, setShowItems] = useState(false)
 
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null)
 
   useOutsideClick(ref, () => {
-    if (showItems) setShowItems(false);
-  });
+    if (showItems) setShowItems(false)
+  })
 
   const handleSetShowItems = () => {
-    !!address && !!userProfile && setShowItems(!showItems);
-  };
+    !!address && setShowItems(!showItems)
+  }
 
   return (
     <div className="relative w-full">
@@ -117,8 +115,8 @@ const ChainList = ({ setConditionData, conditionData }: Props) => {
                   <div
                     key={index}
                     onClick={() => {
-                      setShowItems(false);
-                      handleSelectChain(chain);
+                      setShowItems(false)
+                      handleSelectChain(chain)
                     }}
                     className="flex h-[46px] w-full items-center gap-2 rounded-xl px-2 text-sm text-white hover:bg-gray70"
                   >
@@ -130,8 +128,8 @@ const ChainList = ({ setConditionData, conditionData }: Props) => {
                   <div
                     key={index}
                     onClick={() => {
-                      setShowItems(false);
-                      handleSelectChain(chain);
+                      setShowItems(false)
+                      handleSelectChain(chain)
                     }}
                     className="flex h-[46px] w-full items-center gap-2 rounded-xl px-2 text-sm text-white hover:bg-gray70"
                   >
@@ -143,7 +141,7 @@ const ChainList = ({ setConditionData, conditionData }: Props) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChainList;
+export default ChainList
