@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import React from "react";
+import React from "react"
 import {
   Table,
   TableHeader,
@@ -8,22 +8,22 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from "@nextui-org/react";
+} from "@nextui-org/react"
 
 const statusColorMap = {
   active: "success",
   paused: "danger",
   vacation: "warning",
-};
+}
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"]
 
 const columns = [
   { name: "Price", uid: "price" },
   { name: "Amount", uid: "amount" },
   { name: "Total", uid: "total" },
   { name: "My Size", uid: "mySize" },
-];
+]
 
 const data = [
   { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 5 },
@@ -33,32 +33,32 @@ const data = [
   { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 4 },
   { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 4 },
   { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 3 },
-];
+]
 export default function SellingOrders() {
   const renderCell = React.useCallback((item: any, columnKey: string) => {
-    const cellValue = item[columnKey];
+    const cellValue = item[columnKey]
 
     switch (columnKey) {
       case "price":
-        const wholeNumber = cellValue.toFixed(3);
-        const afterDigits = cellValue.toString().substring(wholeNumber.length);
+        const wholeNumber = cellValue.toFixed(3)
+        const afterDigits = cellValue.toString().substring(wholeNumber.length)
         return (
           <p className="text-error">
             {wholeNumber}
             <span className="text-error-light">{afterDigits}</span>
           </p>
-        );
+        )
 
       default:
-        return cellValue ?? "-";
+        return cellValue ?? "-"
     }
-  }, []);
+  }, [])
 
   const classNames = React.useMemo(
     () => ({
       th: ["bg-transparent", "text-gray80"],
       td: [
-        "text-gray100 font-semibold text-right",
+        "text-gray100 font-semibold",
 
         // first
         "group-data-[first=true]:first:before:rounded-none",
@@ -71,7 +71,7 @@ export default function SellingOrders() {
       ],
     }),
     [],
-  );
+  )
 
   return (
     <Table
@@ -106,5 +106,5 @@ export default function SellingOrders() {
         )}
       </TableBody>
     </Table>
-  );
+  )
 }
