@@ -15,8 +15,18 @@ const TextField: FC<
     className?: string
     disabled?: boolean
     placeholder?: string
+    value?: any
+    onChange?: (value: any) => void
   }
-> = ({ label, className, children, disabled, placeholder }) => {
+> = ({
+  label,
+  className,
+  children,
+  disabled,
+  placeholder,
+  onChange,
+  value,
+}) => {
   return (
     <div
       className={`relative ${className ?? ""} flex overflow-hidden rounded-2xl border border-gray60 bg-gray40 ${firaCode}`}
@@ -26,6 +36,8 @@ const TextField: FC<
       </label>
 
       <input
+        value={value}
+        onChange={(e) => onChange?.(e.target.value)}
         disabled={disabled}
         type="number"
         placeholder={placeholder ?? "0.00"}

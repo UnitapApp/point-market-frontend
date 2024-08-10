@@ -21,8 +21,6 @@ const tokens: any[] = []
 const CurrencySelect = () => {
   const { symbols, setSelectedSymbol, selectedSymbol } = useOfferTokenContext()
 
-  console.log(selectedSymbol)
-
   return (
     <div className="background-dashboard rounded-4xl flex items-center gap-4 border-2 border-gray60 p-10">
       <Select
@@ -30,7 +28,7 @@ const CurrencySelect = () => {
         className="max-w-xs"
         placeholder="USDC / UXP"
         value={selectedSymbol ?? ""}
-        selectedKeys={selectedSymbol ?? ""}
+        selectedKeys={[selectedSymbol ?? ""]}
         onChange={(e) => setSelectedSymbol(e.target.value)}
         size="lg"
         radius="lg"

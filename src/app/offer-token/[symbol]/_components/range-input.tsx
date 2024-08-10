@@ -59,13 +59,15 @@ function RangeInput({
             height: 4,
           },
           handle: {
-            borderColor: "#4CE6A1",
-            borderWidth: "1px",
+            background:
+              "linear-gradient(to bottom right, #4BF2A2 -4.66%, #A89FE7 56.06%, #E1C4F4 73.07%, #DD40CD 111.44%, #DD40CD 111.44%)",
             opacity: 1,
             height: 12,
             width: 12,
             marginTop: -4,
+            borderWidth: 0,
             borderRadius: 2,
+            transform: "rotate(-45deg)",
             boxShadow: "none",
             backgroundColor: mixedColor,
           },
@@ -83,7 +85,7 @@ function RangeInput({
         }}
         min={0}
         max={maxLeverage}
-        step={1}
+        step={0.25}
         marks={marks}
         value={value}
         activeDotStyle={{ borderColor: "#4CE6A1" }}

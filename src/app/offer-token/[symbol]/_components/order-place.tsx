@@ -4,6 +4,7 @@ import TextField from "./text-field"
 import RangeInput from "./range-input"
 import { useState } from "react"
 import { useOfferTokenContext } from "../providers"
+import { useWalletAccount } from "@/utils/wallet"
 
 const OrderPlace = () => {
   const [sliderValue, setSliderValue] = useState(0)
@@ -15,6 +16,16 @@ const OrderPlace = () => {
     balance,
     symbol,
   } = useOfferTokenContext()
+
+  const {} = useWalletAccount()
+
+  const [loading, setLoading] = useState(false)
+
+  const [order, setOrder] = useState({
+    price: 0,
+  })
+
+  const submitOrder = () => {}
 
   return (
     <div className="background-dashboard rounded-4xl overflow-hidden border-2 border-gray60">
@@ -83,6 +94,10 @@ const OrderPlace = () => {
             placeholder={isMarketPrice ? "" : "0.00"}
             disabled={isMarketPrice}
             label="Price"
+            value={order.price}
+            onChange={(value) =>
+              setOrder({ ...order, price: Number(value ?? 0) })
+            }
           >
             {isMarketPrice ? (
               <div className="absolute bottom-0 right-5 top-0 flex items-center gap-4 text-space-green font-semibold">
@@ -101,7 +116,12 @@ const OrderPlace = () => {
               </div>
             )}
           </TextField>
-          <TextField label="Amount" className="mt-5">
+          <TextField
+            value={sliderValue}
+            onChange={(value) => setSliderValue(Number(value || 0))}
+            label="Amount"
+            className="mt-5"
+          >
             <div className="absolute bottom-0 right-0 top-0 flex items-center gap-4">
               <button className="bg-g-primary bg-clip-text font-semibold text-transparent placeholder:text-gray80">
                 UXP
@@ -117,13 +137,18 @@ const OrderPlace = () => {
           <div className="mt-8">
             <RangeInput
               value={sliderValue}
-              maxLeverage={100}
+              maxLeverage={balance ?? 0}
               onChange={setSliderValue}
               mixedColor="#4CE6A1"
             />
           </div>
 
-          <TextField disabled className="mt-10" label="Total Amount">
+          <TextField
+            value={(order.price ?? 0) * sliderValue}
+            disabled
+            className="mt-10"
+            label="Total Amount"
+          >
             <div className="absolute bottom-0 right-0 top-0 flex items-center gap-4">
               <button className="font-semibold text-[#4079BC] placeholder:text-gray80">
                 USDC
@@ -142,7 +167,8 @@ const OrderPlace = () => {
             <span>Maximum Fee</span>
 
             <div>
-              0 <span className="font-semibold text-[#4079BC]">USDC</span>
+              {sliderValue / 10}{" "}
+              <span className="font-semibold text-[#4079BC]">USDC</span>
             </div>
           </div>
 
@@ -151,9 +177,9 @@ const OrderPlace = () => {
             <span className="font-semibold">Your Receipt</span>
 
             <div>
-              0{" "}
+              {sliderValue}{" "}
               <span className="bg-g-primary bg-clip-text font-semibold text-transparent">
-                UXP
+                {symbol.toLocaleUpperCase()}
               </span>
             </div>
           </div>
@@ -164,7 +190,7 @@ const OrderPlace = () => {
         </button>
       </main>
 
-      <footer className="-mt-5 h-64 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">
+      <footer className="-mt-20 h-44 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">
         {/* <Image
           width={360}
           className="mx-auto"
