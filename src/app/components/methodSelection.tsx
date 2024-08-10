@@ -1,38 +1,38 @@
-import { FC, useMemo, useState } from "react"
+import { FC, useMemo, useState } from "react";
 
 const MethodSelection: FC<{
-  setConditionData: (value: any) => void
-  conditionData: any
-  errorMessage?: string
+  setConditionData: (value: any) => void;
+  conditionData: any;
+  errorMessage?: string;
 }> = ({ setConditionData, conditionData, errorMessage }) => {
-  const [showMethods, setShowMethods] = useState(false)
+  const [showMethods, setShowMethods] = useState(false);
 
   const methods = useMemo(() => {
-    if (!conditionData.abi) return []
+    if (!conditionData.abi) return [];
 
     const data = conditionData.abi.filter(
       (item: any) => item.type === "function"
-    )
-    return data
-  }, [conditionData])
+    );
+    return data;
+  }, [conditionData]);
 
   const handleSelectMethod = (
     method: string,
     paramsMap: { name: string; type: string }[]
   ) => {
-    setShowMethods(false)
+    setShowMethods(false);
     setConditionData((prev: any) => ({
       ...prev,
       selectedMethod: method,
       functionSignature: `${method}(${paramsMap.map((item) => item.type).join(",")})`,
       paramsMask: paramsMap.map((item) => item.type),
-    }))
-  }
+    }));
+  };
   return (
     <div className="relative">
       <div className="relative">
         <div
-          onClick={setShowMethods.bind(null, true)}
+          onClick={setShowMethods.bind(null, !showMethods)}
           className="flex cursor-pointer items-center justify-between rounded-xl border border-gray50 bg-gray40 p-3 px-6"
         >
           <div
@@ -83,7 +83,7 @@ const MethodSelection: FC<{
         {errorMessage}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MethodSelection
+export default MethodSelection;
