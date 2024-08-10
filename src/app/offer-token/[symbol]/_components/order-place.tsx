@@ -146,8 +146,25 @@ const OrderPlace = () => {
                 </button>
 
                 <div className="flex h-full flex-col text-gray100">
-                  <button className="bg-[#1B1B29] px-1">+</button>
-                  <button className="bg-[#1B1B29] px-1">-</button>
+                  <button
+                    className="bg-[#1B1B29] px-1"
+                    onClick={() =>
+                      setOrder({ ...order, price: Number(order.price + 1) })
+                    }
+                  >
+                    +
+                  </button>
+                  <button
+                    className="bg-[#1B1B29] px-1"
+                    onClick={() =>
+                      setOrder({
+                        ...order,
+                        price: Math.max(Number(order.price - 1), 0),
+                      })
+                    }
+                  >
+                    -
+                  </button>
                 </div>
               </div>
             )}
@@ -164,8 +181,22 @@ const OrderPlace = () => {
               </button>
 
               <div className="flex h-full flex-col text-gray100">
-                <button className="bg-[#1B1B29] px-1">+</button>
-                <button className="bg-[#1B1B29] px-1">-</button>
+                <button
+                  className="bg-[#1B1B29] px-1"
+                  onClick={() =>
+                    setSliderValue(Math.min(balance!, Number(sliderValue + 1)))
+                  }
+                >
+                  +
+                </button>
+                <button
+                  onClick={() =>
+                    setSliderValue(Math.max(0, Number(sliderValue - 1)))
+                  }
+                  className="bg-[#1B1B29] px-1"
+                >
+                  -
+                </button>
               </div>
             </div>
           </TextField>
