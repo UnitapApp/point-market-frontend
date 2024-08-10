@@ -1,45 +1,105 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import TextField from "./text-field";
-import RangeInput from "./range-input";
-import { useState } from "react";
+import TextField from "./text-field"
+import RangeInput from "./range-input"
+import { useState } from "react"
+import { useOfferTokenContext } from "../providers"
 
 const OrderPlace = () => {
-  const [sliderValue, setSliderValue] = useState(0);
+  const [sliderValue, setSliderValue] = useState(0)
+  const {
+    orderingMode,
+    setOrderingMode,
+    isMarketPrice,
+    setIsMarketPrice,
+    balance,
+    symbol,
+  } = useOfferTokenContext()
+
   return (
-    <div className="background-dashboard rounded-4xl overflow-hidden border-2  border-gray60">
+    <div className="background-dashboard rounded-4xl overflow-hidden border-2 border-gray60">
       <header className="flex items-center">
-        <button className="flex-1 border-b-2 border-white bg-gray40 px-10 py-5 text-center text-white">
+        <button
+          onClick={() => setIsMarketPrice(false)}
+          className={`flex-1 border-b-2 transition-all ${isMarketPrice ? "text-gray90 border-transparent" : "border-white bg-gray40 text-white"}  px-10 py-5 text-center`}
+        >
           Order
         </button>
-        <button className="flex-1 px-10 py-5 text-center text-gray90">
+        <button
+          onClick={() => setIsMarketPrice(true)}
+          className={`flex-1 px-10 border-b-2 py-5 transition-all text-center text-gray90 ${isMarketPrice ? "border-white bg-gray40 text-white" : "text-gray90 border-transparent"}`}
+        >
           Market Price
         </button>
       </header>
 
       <main className="p-5">
-        <div className="flex font-semibold">
-          <button className="relative flex-1 bg-[url('/assets/images/offer-token/button-bg.svg')] bg-cover bg-no-repeat py-3 pr-3 text-center text-white">
-            Buy
+        <div className="flex overflow-hidden gap-4 font-semibold rounded-xl">
+          <button
+            onClick={() => setOrderingMode("buy")}
+            className={`relative h-12 ${orderingMode === "buy" ? "bg-dark-space-green" : "bg-gray60"} transition-colors flex-1 rounded-xl -ml-5 skew-x-[20deg] py-3 pr-3 text-center text-white`}
+          >
+            <p className="absolute top-1/2 left-1/2 -skew-x-[20deg] -translate-x-1/2 -translate-y-1/2">
+              Buy
+            </p>
           </button>
-          <button className="relative flex-1 bg-[url('/assets/images/offer-token/button-right.svg')] bg-cover bg-no-repeat py-3 pl-3 text-center text-white">
-            Sell
+          <button
+            onClick={() => setOrderingMode("sell")}
+            className={`relative h-12 transition-colors flex-1 rounded-xl -mr-5 skew-x-[20deg] py-3 pr-3 text-center text-white ${orderingMode === "sell" ? "bg-error/30" : "bg-gray60"}`}
+          >
+            <p className="absolute top-1/2 left-1/2 -skew-x-[20deg] -translate-x-1/2 -translate-y-1/2">
+              Sell
+            </p>
           </button>
         </div>
+        <div className="my-5 rounded-3xl border-2 border-gray60 bg-gray20">
+          <div className="flex items-center justify-between py-4 px-5 text-gray90">
+            <span>{symbol.toLocaleUpperCase()} Available Balance</span>
 
-        <div className="mt-5">
-          <TextField label="Price">
-            <div className="absolute bottom-0 right-0 top-0 flex items-center gap-4">
-              <button className="font-semibold text-[#4079BC] placeholder:text-gray80">
-                USDC
-              </button>
-
-              <div className="flex h-full flex-col text-gray100">
-                <button className="bg-[#1B1B29] px-1">+</button>
-                <button className="bg-[#1B1B29] px-1">-</button>
-              </div>
+            <div>
+              <span className="text-gray100 mr-2">
+                {(balance ?? 0).toFixed(2)}{" "}
+              </span>
+              <span className="text-[#4079BC]">
+                {symbol.toLocaleUpperCase()}
+              </span>
             </div>
+          </div>
+
+          <div className="h-[2px] bg-gray60"></div>
+          <div className="flex items-center justify-between py-4 px-4 text-gray100">
+            <span className="text-gray90">Best Offer for Selling UXP</span>
+
+            <div>
+              <span className="text-gray100 mr-2">{32.5698} </span>
+              <span className="text-[#4079BC]">
+                {symbol.toLocaleUpperCase()}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-5">
+          <TextField
+            placeholder={isMarketPrice ? "" : "0.00"}
+            disabled={isMarketPrice}
+            label="Price"
+          >
+            {isMarketPrice ? (
+              <div className="absolute bottom-0 right-5 top-0 flex items-center gap-4 text-space-green font-semibold">
+                Market Price
+              </div>
+            ) : (
+              <div className="absolute bottom-0 right-0 top-0 flex items-center gap-4">
+                <button className="font-semibold text-[#4079BC] placeholder:text-gray80">
+                  USDC
+                </button>
+
+                <div className="flex h-full flex-col text-gray100">
+                  <button className="bg-[#1B1B29] px-1">+</button>
+                  <button className="bg-[#1B1B29] px-1">-</button>
+                </div>
+              </div>
+            )}
           </TextField>
           <TextField label="Amount" className="mt-5">
             <div className="absolute bottom-0 right-0 top-0 flex items-center gap-4">
@@ -63,7 +123,7 @@ const OrderPlace = () => {
             />
           </div>
 
-          <TextField className="mt-10" label="Total Amount">
+          <TextField disabled className="mt-10" label="Total Amount">
             <div className="absolute bottom-0 right-0 top-0 flex items-center gap-4">
               <button className="font-semibold text-[#4079BC] placeholder:text-gray80">
                 USDC
@@ -104,17 +164,17 @@ const OrderPlace = () => {
         </button>
       </main>
 
-      <footer className="-mt-5 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">
-        <Image
+      <footer className="-mt-5 h-64 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">
+        {/* <Image
           width={360}
           className="mx-auto"
           height={360}
           src="/assets/images/offer-token/image.png"
           alt="charts"
-        />
+        /> */}
       </footer>
     </div>
-  );
-};
+  )
+}
 
-export default OrderPlace;
+export default OrderPlace

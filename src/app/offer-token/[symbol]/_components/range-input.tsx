@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import React, { useMemo } from "react";
-import styled from "styled-components";
-import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
+import React, { useMemo } from "react"
+import styled from "styled-components"
+import Slider from "rc-slider"
+import "rc-slider/assets/index.css"
 
 const Wrapper = styled.div`
   margin-top: 10px;
@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   .rc-slider-mark-text-active:last-chid {
     color: green;
   }
-`;
+`
 
 function RangeInput({
   value,
@@ -22,10 +22,10 @@ function RangeInput({
   onChange,
   mixedColor,
 }: {
-  value: number;
-  maxLeverage: number;
-  onChange: any;
-  mixedColor: string;
+  value: number
+  maxLeverage: number
+  onChange: any
+  mixedColor: string
 }) {
   const marks = useMemo(() => {
     if (maxLeverage === 100) {
@@ -35,7 +35,7 @@ function RangeInput({
         50: "50",
         75: "75",
         100: "100",
-      };
+      }
     }
 
     const range = (
@@ -46,10 +46,10 @@ function RangeInput({
       Array.from(
         { length: (stop - start) / step + 1 },
         (_, i) => start + i * step,
-      ).reduce((a, v) => ({ ...a, [v]: v, [maxLeverage]: maxLeverage }), {});
+      ).reduce((a, v) => ({ ...a, [v]: v, [maxLeverage]: maxLeverage }), {})
 
-    return range(1, maxLeverage);
-  }, [maxLeverage]);
+    return range(1, maxLeverage)
+  }, [maxLeverage])
   return (
     <Wrapper>
       <Slider
@@ -90,7 +90,7 @@ function RangeInput({
         onChange={onChange}
       />
     </Wrapper>
-  );
+  )
 }
 
-export default RangeInput;
+export default RangeInput
