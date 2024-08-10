@@ -42,3 +42,13 @@ export const createOrderApi = (
     address,
   })
 }
+
+export const fetchSymbolOrders = (symbol: string) => {
+  return marketClient
+    .get("/market/orders/", {
+      params: {
+        symbol,
+      },
+    })
+    .then((res) => res.data)
+}

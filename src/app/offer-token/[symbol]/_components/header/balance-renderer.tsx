@@ -7,7 +7,7 @@ const BalanceRenderer: FC = () => {
   const { symbol, balance } = useOfferTokenContext()
 
   return (
-    <div className="background-dashboard rounded-4xl flex items-center justify-between border-2 border-gray60 p-9">
+    <div className="background-dashboard text-large rounded-4xl flex items-center justify-between border-2 border-gray60 p-9">
       <div>
         <p className="text-gray90">Your Balance in {symbol}</p>
         <p className="mt-1 font-semibold text-white">

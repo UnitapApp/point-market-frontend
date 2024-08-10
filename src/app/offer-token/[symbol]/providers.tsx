@@ -1,6 +1,10 @@
 "use client"
 
-import { fetchSymbolsList, fetchWalletBalance } from "@/utils/api/point-market"
+import {
+  fetchSymbolOrders,
+  fetchSymbolsList,
+  fetchWalletBalance,
+} from "@/utils/api/point-market"
 import { useWalletAccount } from "@/utils/wallet"
 import {
   FC,
@@ -25,6 +29,7 @@ export const OfferTokenContext = createContext({
   symbols: [] as { name: string }[],
   isMarketPrice: false,
   setIsMarketPrice: (value: boolean) => {},
+  orders: { buys: [], sells: [] },
 })
 
 export const useOfferTokenContext = () => useContext(OfferTokenContext)
@@ -61,7 +66,9 @@ const OfferTokenProvider: FC<PropsWithChildren & { symbol: string }> = ({
       setSymbols(res)
       setSelectedSymbol(res[0].name)
     })
-  }, [])
+
+    fetchSymbolOrders(symbol).then(setOrders)
+  }, [symbol])
 
   return (
     <OfferTokenContext.Provider
@@ -76,6 +83,7 @@ const OfferTokenProvider: FC<PropsWithChildren & { symbol: string }> = ({
         symbols,
         isMarketPrice,
         setIsMarketPrice,
+        orders,
       }}
     >
       {children}

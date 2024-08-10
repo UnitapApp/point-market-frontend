@@ -14,6 +14,8 @@ import { useWalletAccount } from "@/utils/wallet"
 import { useSignMessage } from "wagmi"
 import { makePointApi } from "@/utils/api/point-market"
 import { toast } from "react-toastify"
+import { Button } from "@nextui-org/react"
+import Link from "next/link"
 
 const RubikMonoOne = Rubik_Mono_One({
   weight: ["400"],
@@ -132,14 +134,15 @@ const MainPage = () => {
   }
 
   return (
-    <div className="flex w-full mt-20 items-center justify-center">
+    <div className="flex flex-col w-full mt-20 items-center justify-center">
       <div className="bg-gray[#13131E] relative flex bg-[url('/assets/images/hackathon/bg-cover.svg')] bg-contain bg-no-repeat min-h-[478px] w-full max-w-[572px] flex-col items-center rounded-[20px] border-2 border-gray30 px-5 pt-[60px] md:px-0 ">
         <div className="title-text mb-9 text-center">
           <div
             className={`text-[24px] font-normal ${RubikMonoOne.className} gradient-text-hackaThon`}
           >
-            UNITAP HACKATHON
+            PointBase
           </div>
+
           <div className="text-sm font-medium mt-5 text-gray100">
             Where you can convert users action to
           </div>
@@ -178,7 +181,18 @@ const MainPage = () => {
             Connect Wallet
           </button>
         )}
+        <div className="text-base font-medium mb-10 mt-5 text-gray100">
+          Unitap participating in Superhack 2024 and EigenLayer infinite
+          hackathon
+        </div>
       </div>
+      <Button
+        as={Link}
+        className={`"cursor-pointer mt-5 flex py-3 w-full max-w-[452px] select-none items-center justify-center rounded-xl text-center text-sm font-bold leading-5`}
+        href="/offer-token/usdc"
+      >
+        Visit Point Marketplace
+      </Button>
     </div>
   )
 }

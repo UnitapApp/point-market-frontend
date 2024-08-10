@@ -22,7 +22,7 @@ const CurrencySelect = () => {
   const { symbols, setSelectedSymbol, selectedSymbol } = useOfferTokenContext()
 
   return (
-    <div className="background-dashboard rounded-4xl flex items-center gap-4 border-2 border-gray60 p-10">
+    <div className="background-dashboard text-large rounded-4xl flex items-center gap-4 border-2 border-gray60 p-10">
       <Select
         aria-label="currency-select"
         className="max-w-xs"
@@ -52,12 +52,12 @@ const CurrencySelect = () => {
       </div>
 
       <div className="text-center">
-        <p className="text-gray90">24h Change</p>
+        <p className="text-gray90">24h High</p>
         <p className="font-semibold text-white">-1,172.00</p>
       </div>
 
       <div className="text-center">
-        <p className="text-gray90">24h Change</p>
+        <p className="text-gray90">24h Low</p>
         <p className="font-semibold text-white">-1,172.00</p>
       </div>
     </div>
