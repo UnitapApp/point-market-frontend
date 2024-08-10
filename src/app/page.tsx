@@ -188,7 +188,7 @@ const MainPage = () => {
       </div>
       <Button
         as={Link}
-        className={`"cursor-pointer mt-5 flex py-3 w-full max-w-[452px] select-none items-center justify-center rounded-xl text-center text-sm font-bold leading-5`}
+        className={`mt-5 flex py-3 w-full max-w-[452px] select-none items-center justify-center rounded-xl text-center text-sm font-bold leading-5`}
         href="/offer-token/usdc"
       >
         Visit Point Marketplace

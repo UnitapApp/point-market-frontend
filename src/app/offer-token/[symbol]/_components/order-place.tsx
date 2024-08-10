@@ -230,7 +230,7 @@ const OrderPlace = () => {
         </Button>
       </main>
 
-      <footer className="-mt-20 h-44 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">
+      <footer className="-mt-20 h-52 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">
         {/* <Image
           width={360}
           className="mx-auto"
