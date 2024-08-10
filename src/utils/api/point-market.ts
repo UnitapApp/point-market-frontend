@@ -30,3 +30,15 @@ export const fetchSymbolsList = async () => {
 
   return res.data
 }
+
+export const createOrderApi = (
+  message: string,
+  address: string,
+  signature: string,
+) => {
+  return marketClient.post("/market/createOrder", {
+    message,
+    signature,
+    address,
+  })
+}

@@ -5,6 +5,10 @@ import RangeInput from "./range-input"
 import { useState } from "react"
 import { useOfferTokenContext } from "../providers"
 import { useWalletAccount } from "@/utils/wallet"
+import { useSignMessage } from "wagmi"
+import { toast } from "react-toastify"
+import { createOrderApi } from "@/utils/api/point-market"
+import { Button } from "@nextui-org/react"
 
 const OrderPlace = () => {
   const [sliderValue, setSliderValue] = useState(0)
@@ -15,9 +19,18 @@ const OrderPlace = () => {
     setIsMarketPrice,
     balance,
     symbol,
+    selectedSymbol,
   } = useOfferTokenContext()
 
-  const {} = useWalletAccount()
+  const {
+    data: signMessageData,
+    error,
+    signMessage,
+    variables,
+    signMessageAsync,
+  } = useSignMessage()
+
+  const { address } = useWalletAccount()
 
   const [loading, setLoading] = useState(false)
 
@@ -25,7 +38,30 @@ const OrderPlace = () => {
     price: 0,
   })
 
-  const submitOrder = () => {}
+  const submitOrder = () => {
+    if (!address || !sliderValue || !symbol || !order.price) return
+
+    setLoading(true)
+
+    const message = JSON.stringify({
+      symbol: selectedSymbol,
+      name: orderingMode,
+      amount: sliderValue,
+      price: order.price,
+      time: new Date().toISOString(),
+      nonce: 1,
+    })
+
+    signMessageAsync({
+      message,
+    })
+      .then((res) => {
+        return createOrderApi(message, address, res)
+      })
+      .finally(() => {
+        toast.success("Order created successfully"), setLoading(false)
+      })
+  }
 
   return (
     <div className="background-dashboard rounded-4xl overflow-hidden border-2 border-gray60">
@@ -185,9 +221,13 @@ const OrderPlace = () => {
           </div>
         </div>
 
-        <button className="mt-7 w-full rounded-2xl border-2 bg-dark-space-green px-5 py-3 text-center font-semibold text-space-green">
-          Buy UXP
-        </button>
+        <Button
+          isLoading={loading}
+          onClick={submitOrder}
+          className={`mt-7 w-full rounded-2xl border-2 px-5 py-3 text-center font-semibold  ${orderingMode === "buy" ? "bg-dark-space-green text-space-green border-dark-space-green" : "text-error border-error bg-error/10"}`}
+        >
+          {orderingMode === "buy" ? "Buy " : "Sell "} {selectedSymbol}
+        </Button>
       </main>
 
       <footer className="-mt-20 h-44 bg-[url('/assets/images/offer-token/bg-blur.png')] bg-cover bg-no-repeat">

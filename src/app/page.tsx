@@ -108,15 +108,17 @@ const MainPage = () => {
           functionSignature,
           numberOfPoints,
           nameOfPoint,
+          contractAddress,
           ...item
         }) => ({
           ...item,
           chain: Number(item.chain?.chainId),
+          contract_address: contractAddress,
           params_mask: paramsMask,
           function_signature: functionSignature,
           value: Number(numberOfPoints),
           receiver: -1,
-        })
+        }),
       ),
     })
 
@@ -124,7 +126,7 @@ const MainPage = () => {
       message,
     }).then((res) => {
       makePointApi(message, address, res).then(() =>
-        toast.success("Symbol created successfully")
+        toast.success("Symbol created successfully"),
       )
     })
   }

@@ -58,7 +58,7 @@ export default async function RootLayout({
           </UnitapProvider>
         </Providers>
 
-        <ToastContainer />
+        <ToastContainer theme="dark" />
         <Progressbar />
 
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
