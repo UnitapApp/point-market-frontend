@@ -107,6 +107,7 @@ const MainPage = () => {
           paramsMask,
           functionSignature,
           numberOfPoints,
+          nameOfPoint,
           ...item
         }) => ({
           ...item,
