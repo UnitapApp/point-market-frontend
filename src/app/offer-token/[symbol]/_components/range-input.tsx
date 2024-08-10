@@ -65,6 +65,7 @@ function RangeInput({
             height: 12,
             width: 12,
             marginTop: -4,
+            marginLeft: -5,
             borderWidth: 0,
             borderRadius: 2,
             transform: "rotate(-45deg)",
