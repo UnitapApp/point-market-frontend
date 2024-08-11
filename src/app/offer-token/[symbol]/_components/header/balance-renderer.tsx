@@ -18,12 +18,10 @@ const BalanceRenderer: FC = () => {
         </p>
       </div>
       <button className=" rounded-2xl px-6 py-3 border-2 ml-auto mr-2 border-[#4CE6A1] font-semibold text-black">
-        <p className="button-primary bg-clip-text text-transparent">
-          Withdraw {symbol.toLocaleUpperCase()}
-        </p>
+        <p className="button-primary bg-clip-text text-transparent">Withdraw</p>
       </button>
       <button className="button-primary rounded-2xl px-6 py-3 font-semibold text-black">
-        Deposit More
+        Deposit
       </button>
     </div>
   )
