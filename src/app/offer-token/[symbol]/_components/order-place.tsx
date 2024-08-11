@@ -70,7 +70,7 @@ const OrderPlace = () => {
       .then((res) => {
         return createOrderApi(message, address, res)
       })
-      .finally(() => {
+      .then(() => {
         toast.success("Order created successfully"), setLoading(false)
       })
   }

@@ -14,7 +14,7 @@ const OfferTokenPage = () => {
         <div className="col-span-9">
           <Header />
 
-          <main className="mt-5 grid grid-cols-9 gap-4">
+          <main className="mt-5 min-h-[710px] grid grid-cols-9 gap-4">
             <div className="col-span-3">
               <Tables />
             </div>

@@ -36,6 +36,39 @@ export const getFaucetListServer = async () => {
       isDeprecated: false,
       remainingClaimNumber: 155,
     }),
+    convertFaucetToChain({
+      pk: 2,
+      chain: {
+        pk: 2,
+        chainName: "Base",
+        chainId: "8453",
+        nativeCurrencyName: "ETH",
+        symbol: "ETH",
+        decimals: 18,
+        explorerUrl: "https://basescan.org /",
+        rpcUrl: "https://mainnet.optimism.io",
+        logoUrl:
+          "https://altcoinsbox.com/wp-content/uploads/2023/02/base-logo-in-blue.webp",
+        modalUrl:
+          "https://altcoinsbox.com/wp-content/uploads/2023/02/base-logo-in-blue.webp",
+        isTestnet: false,
+        chainType: "EVM",
+      },
+      fundManagerAddress: "0xb3A97684Eb67182BAa7994b226e6315196D8b364",
+      gasImageUrl:
+        "https://imagedelivery.net/XQ6LDks1pWNDtTDAw7o9nA/cef210ce-85ba-4482-f3bb-bbc5f6ecb200/public",
+      maxClaimAmount: 50000000000000,
+      totalClaims: 23,
+      totalClaimsThisRound: 1,
+      tokentapContractAddress: "0x54a839FF128DC1891a03d7a81724bD5D51A5902b",
+      needsFunding: false,
+      blockScanAddress:
+        "https://optimistic.etherscan.io/address/0xb3A97684Eb67182BAa7994b226e6315196D8b364",
+      isOneTimeClaim: false,
+      currentFuelLevel: 10,
+      isDeprecated: false,
+      remainingClaimNumber: 155,
+    }),
   ]
 }
 
