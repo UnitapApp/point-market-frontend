@@ -48,7 +48,7 @@ const OfferTokenProvider: FC<PropsWithChildren & { symbol: string }> = ({
 
   const [orderingMode, setOrderingMode] = useState("buy" as OrderingMode)
 
-  const [selectedSymbol, setSelectedSymbol] = useState("" as string)
+  const [selectedSymbol, setSelectedSymbol] = useState(symbol as string)
 
   const [symbols, setSymbols] = useState([])
   const { address } = useWalletAccount()
@@ -67,8 +67,8 @@ const OfferTokenProvider: FC<PropsWithChildren & { symbol: string }> = ({
       setSelectedSymbol(res[0].name)
     })
 
-    fetchSymbolOrders(symbol).then(setOrders)
-  }, [symbol])
+    fetchSymbolOrders(selectedSymbol).then(setOrders)
+  }, [selectedSymbol])
 
   return (
     <OfferTokenContext.Provider
