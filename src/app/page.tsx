@@ -114,7 +114,7 @@ const MainPage = () => {
           ...item
         }) => ({
           ...item,
-          chain: Number(item.chain?.chainId),
+          chain: Number(item.chain?.pk),
           contract_address: contractAddress,
           params_mask: paramsMask,
           function_signature: functionSignature,

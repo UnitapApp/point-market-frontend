@@ -43,12 +43,11 @@ export const createOrderApi = (
   })
 }
 
-export const fetchSymbolOrders = (symbol: string) => {
-  return marketClient
-    .get("/market/orders/", {
-      params: {
-        symbol,
-      },
-    })
-    .then((res) => res.data)
+export const fetchSymbolOrders = async (symbol: string) => {
+  const res = await marketClient.get("/market/orders", {
+    params: {
+      symbol,
+    },
+  })
+  return res.data
 }

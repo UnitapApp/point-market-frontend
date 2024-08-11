@@ -19,6 +19,7 @@ const OrderPlace = () => {
     setIsMarketPrice,
     balance,
     symbol,
+    symbols,
     selectedSymbol,
   } = useOfferTokenContext()
 
@@ -44,10 +45,10 @@ const OrderPlace = () => {
     setLoading(true)
 
     const message = JSON.stringify({
-      symbol: selectedSymbol,
+      symbol: symbols.find((item) => item.name === selectedSymbol)!.id,
       name: orderingMode,
-      amount: sliderValue,
-      price: order.price,
+      amount: Math.floor(sliderValue),
+      price: Math.round(order.price),
       time: new Date().toISOString(),
       nonce: 1,
     })

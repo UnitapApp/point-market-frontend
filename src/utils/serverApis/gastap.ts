@@ -4,9 +4,9 @@ import { convertFaucetToChain } from "../api"
 export const getFaucetListServer = async () => {
   return [
     convertFaucetToChain({
-      pk: 15,
+      pk: 1,
       chain: {
-        pk: 15,
+        pk: 1,
         chainName: "Optimism",
         chainId: "10",
         nativeCurrencyName: "ETH",
@@ -49,7 +49,7 @@ export const getClaimedReceiptsServer = async (token?: string) => {
       headers: {
         Authorization: `token ${token}`,
       },
-    }
+    },
   ).then((res) => res.json())
 
   if (!Array.isArray(res)) return []
@@ -70,7 +70,7 @@ export const getOneTimeClaimedReceiptsServer = async (token?: string) => {
       headers: {
         Authorization: `token ${token}`,
       },
-    }
+    },
   ).then((res) => res.json())
 
   if (!Array.isArray(res)) return []
@@ -86,7 +86,7 @@ export async function getFuelChampionListServerSide() {
     process.env.NEXT_PUBLIC_API_URL! + "/api/gastap/fuel-champion",
     {
       cache: "no-store",
-    }
+    },
   ).then((res) => res.json())
 
   return response as FuelChampion[]

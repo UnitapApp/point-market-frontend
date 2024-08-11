@@ -26,7 +26,7 @@ export const OfferTokenContext = createContext({
   balance: 0 as number | undefined,
   orderingMode: "buy" as OrderingMode,
   setOrderingMode: (value: OrderingMode) => {},
-  symbols: [] as { name: string }[],
+  symbols: [] as { name: string; id: number }[],
   isMarketPrice: false,
   setIsMarketPrice: (value: boolean) => {},
   orders: { buys: [], sells: [] },
