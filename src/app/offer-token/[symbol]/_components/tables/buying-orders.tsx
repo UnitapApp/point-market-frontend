@@ -93,7 +93,7 @@ export default function BuyingOrders() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={orders.buys}>
+      <TableBody emptyContent={"No orders found"} items={orders.buys}>
         {(item: any) => (
           <TableRow key={item.id}>
             {(columnKey) => (
