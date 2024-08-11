@@ -11,7 +11,7 @@ const BalanceRenderer: FC = () => {
       <div>
         <p className="text-gray90">Your Balance in {symbol}</p>
         <p className="mt-1 font-semibold text-white">
-          {balance}{" "}
+          {balance ?? 0}{" "}
           <span className="bg-g-primary bg-clip-text text-transparent">
             {symbol.toLocaleUpperCase()}
           </span>

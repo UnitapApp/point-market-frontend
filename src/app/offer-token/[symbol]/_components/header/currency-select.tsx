@@ -26,7 +26,7 @@ const CurrencySelect = () => {
       <Select
         aria-label="currency-select"
         className="max-w-xs"
-        placeholder="USDC / UXP"
+        placeholder="U Point / USDC"
         value={selectedSymbol ?? ""}
         selectedKeys={[selectedSymbol ?? ""]}
         onChange={(e) => setSelectedSymbol(e.target.value)}
