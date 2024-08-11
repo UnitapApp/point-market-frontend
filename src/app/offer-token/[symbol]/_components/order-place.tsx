@@ -21,6 +21,7 @@ const OrderPlace = () => {
     symbol,
     symbols,
     selectedSymbol,
+    orders,
   } = useOfferTokenContext()
 
   const {
@@ -42,6 +43,16 @@ const OrderPlace = () => {
   const submitOrder = () => {
     if (!address || !sliderValue || !symbol || !order.price) return
 
+    const ordersList = [...orders.buys, ...orders.sells]
+
+    let highestNonce = 1
+
+    for (const order of ordersList as any[]) {
+      if (order.id >= highestNonce) {
+        highestNonce = order.id + 1
+      }
+    }
+
     setLoading(true)
 
     const message = JSON.stringify({
@@ -50,7 +61,7 @@ const OrderPlace = () => {
       amount: Math.floor(sliderValue),
       price: Math.round(order.price),
       time: new Date().toISOString(),
-      nonce: 1,
+      nonce: highestNonce,
     })
 
     signMessageAsync({

@@ -9,6 +9,7 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/react"
+import { useOfferTokenContext } from "../../providers"
 
 const statusColorMap = {
   active: "success",
@@ -16,25 +17,15 @@ const statusColorMap = {
   vacation: "warning",
 }
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"]
-
 const columns = [
   { name: "Price", uid: "price" },
   { name: "Amount", uid: "amount" },
   { name: "Total", uid: "total" },
   { name: "My Size", uid: "mySize" },
 ]
-
-const data = [
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 5 },
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 5 },
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 5 },
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 5 },
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 4 },
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 4 },
-  { price: 0.070053, amount: 17.711, total: 1.64710513, mySize: null, id: 3 },
-]
 export default function SellingOrders() {
+  const { orders } = useOfferTokenContext()
+
   const renderCell = React.useCallback((item: any, columnKey: string) => {
     const cellValue = item[columnKey]
 
@@ -48,6 +39,9 @@ export default function SellingOrders() {
             <span className="text-error-light">{afterDigits}</span>
           </p>
         )
+
+      case "total":
+        return item.amount * item.price
 
       default:
         return cellValue ?? "-"
@@ -96,8 +90,8 @@ export default function SellingOrders() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={data}>
-        {(item) => (
+      <TableBody emptyContent={"No users found"} items={orders.sells}>
+        {(item: any) => (
           <TableRow key={item.id}>
             {(columnKey) => (
               <TableCell>{renderCell(item, columnKey as string)}</TableCell>

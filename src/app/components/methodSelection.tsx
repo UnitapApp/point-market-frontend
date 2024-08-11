@@ -1,33 +1,33 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo, useState } from "react"
 
 const MethodSelection: FC<{
-  setConditionData: (value: any) => void;
-  conditionData: any;
-  errorMessage?: string;
+  setConditionData: (value: any) => void
+  conditionData: any
+  errorMessage?: string
 }> = ({ setConditionData, conditionData, errorMessage }) => {
-  const [showMethods, setShowMethods] = useState(false);
+  const [showMethods, setShowMethods] = useState(false)
 
   const methods = useMemo(() => {
-    if (!conditionData.abi) return [];
+    if (!conditionData.abi) return []
 
     const data = conditionData.abi.filter(
-      (item: any) => item.type === "function"
-    );
-    return data;
-  }, [conditionData]);
+      (item: any) => item.type === "function",
+    )
+    return data
+  }, [conditionData])
 
   const handleSelectMethod = (
     method: string,
-    paramsMap: { name: string; type: string }[]
+    paramsMap: { name: string; type: string }[],
   ) => {
-    setShowMethods(false);
+    setShowMethods(false)
     setConditionData((prev: any) => ({
       ...prev,
       selectedMethod: method,
       functionSignature: `${method}(${paramsMap.map((item) => item.type).join(",")})`,
-      paramsMask: paramsMap.map((item) => item.type),
-    }));
-  };
+      paramsMask: paramsMap.map((item) => "*"),
+    }))
+  }
   return (
     <div className="relative">
       <div className="relative">
@@ -70,7 +70,7 @@ const MethodSelection: FC<{
                   item.inputs.map((item: any) => ({
                     type: item.internalType,
                     name: item.name,
-                  }))
+                  })),
                 )
               }
             >
@@ -83,7 +83,7 @@ const MethodSelection: FC<{
         {errorMessage}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MethodSelection;
+export default MethodSelection
