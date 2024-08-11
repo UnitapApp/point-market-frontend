@@ -64,7 +64,7 @@ const OfferTokenProvider: FC<PropsWithChildren & { symbol: string }> = ({
 
     fetchSymbolsList().then((res) => {
       setSymbols(res)
-      setSelectedSymbol(res[0].name)
+      // setSelectedSymbol(res[0].name)
     })
 
     fetchSymbolOrders(selectedSymbol).then(setOrders)
