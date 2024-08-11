@@ -45,7 +45,7 @@ export const createOrderApi = (
 
 export const fetchSymbolOrders = (symbol: string) => {
   return marketClient
-    .get("/market/orders/", {
+    .get("/market/orderbook", {
       params: {
         symbol,
       },
