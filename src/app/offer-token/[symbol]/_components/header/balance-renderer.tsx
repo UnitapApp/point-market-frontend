@@ -4,7 +4,7 @@ import { FC } from "react"
 import { useOfferTokenContext } from "../../providers"
 
 const BalanceRenderer: FC = () => {
-  const { symbol, balance } = useOfferTokenContext()
+  const { selectedSymbol: symbol, balance } = useOfferTokenContext()
 
   return (
     <div className="background-dashboard text-large rounded-4xl flex items-center justify-between border-2 border-gray60 p-9">

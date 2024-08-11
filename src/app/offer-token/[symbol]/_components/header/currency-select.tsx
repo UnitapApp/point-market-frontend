@@ -46,7 +46,7 @@ const CurrencySelect = () => {
         ))}
       </Select>
 
-      <div className="ml-auto text-center">
+      {/* <div className="ml-auto text-center">
         <p className="text-gray90">24h Change</p>
         <p className="font-semibold text-white">-1,172.00</p>
       </div>
@@ -59,7 +59,7 @@ const CurrencySelect = () => {
       <div className="text-center">
         <p className="text-gray90">24h Low</p>
         <p className="font-semibold text-white">-1,172.00</p>
-      </div>
+      </div> */}
     </div>
   )
 }
