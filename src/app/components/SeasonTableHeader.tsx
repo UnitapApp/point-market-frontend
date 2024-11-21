@@ -6,7 +6,7 @@ import { BsSearch } from "react-icons/bs"
 
 export default function SeasonTableHeader() {
   return (
-    <div className="flex items-center border-b border-divider-color px-14 h-20">
+    <div className="flex items-center border-divider-color px-14 h-20">
       <SeasonTab seasonNumber={1} />
       <SeasonTab seasonNumber={2} />
       <SearchBar />

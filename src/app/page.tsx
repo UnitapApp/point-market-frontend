@@ -1,6 +1,9 @@
 import Image from "next/image"
 import ConnectWalletSection from "./components/ConnectWalletSection"
 import SeasonTableHeader from "./components/SeasonTableHeader"
+import LeaderboardTable from "./components/LeaderboardTable"
+import LearnMoreSection from "./components/LearnMoreSection"
+import SeasonsSection from "./components/SeasonsSection"
 
 export default function HomePage() {
   return (
@@ -22,6 +25,11 @@ export default function HomePage() {
 
       <ConnectWalletSection />
       <SeasonTableHeader />
+
+      <LeaderboardTable />
+
+      <LearnMoreSection />
+      <SeasonsSection />
     </div>
   )
 }
