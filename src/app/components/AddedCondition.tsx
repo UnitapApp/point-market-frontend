@@ -1,10 +1,10 @@
-import React from "react";
-import { ConditionDataProps } from "../page";
-import { shortenAddress } from "@/utils";
+import React from "react"
+import { ConditionDataProps } from "../page.old"
+import { shortenAddress } from "@/utils"
 
 interface Props {
-  conditionList: ConditionDataProps[];
-  handleRemoveCondition: (index: number) => void;
+  conditionList: ConditionDataProps[]
+  handleRemoveCondition: (index: number) => void
 }
 
 const AddedCondition = ({ conditionList, handleRemoveCondition }: Props) => {
@@ -54,7 +54,7 @@ const AddedCondition = ({ conditionList, handleRemoveCondition }: Props) => {
           </div>
         ))}
     </div>
-  );
-};
+  )
+}
 
-export default AddedCondition;
+export default AddedCondition

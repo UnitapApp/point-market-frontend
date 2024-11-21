@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { ConditionDataProps } from "../page"
+import { ConditionDataProps } from "../page.old"
 import ChainList from "./ChainList"
 import { Address, isAddress } from "viem"
 import { getContractAbiApi } from "../helper/getContractAbi"

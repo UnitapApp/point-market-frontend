@@ -1,18 +1,18 @@
-"use client";
-import React, { useState } from "react";
-import AddConditionModal from "./AddConditionModal";
-import { ConditionDataProps } from "../page";
-import AddedCondition from "./AddedCondition";
+"use client"
+import React, { useState } from "react"
+import AddConditionModal from "./AddConditionModal"
+import { ConditionDataProps } from "../page.old"
+import AddedCondition from "./AddedCondition"
 
 interface Props {
-  conditionData: ConditionDataProps;
-  handleSetConditionData: (e: any) => void;
-  setConditionData: React.Dispatch<React.SetStateAction<ConditionDataProps>>;
-  handleAddCondition: () => void;
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  conditionList: ConditionDataProps[];
-  handleRemoveCondition: (index: number) => void;
+  conditionData: ConditionDataProps
+  handleSetConditionData: (e: any) => void
+  setConditionData: React.Dispatch<React.SetStateAction<ConditionDataProps>>
+  handleAddCondition: () => void
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  conditionList: ConditionDataProps[]
+  handleRemoveCondition: (index: number) => void
 }
 
 const AddCondition = ({
@@ -25,22 +25,22 @@ const AddCondition = ({
   conditionList,
   handleRemoveCondition,
 }: Props) => {
-  const [isDisplayInput, setIsDisplayInput] = useState<boolean>(false);
+  const [isDisplayInput, setIsDisplayInput] = useState<boolean>(false)
 
   const handleCloseModal = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   const handleDisplayInput = () => {
-    setIsDisplayInput(!isDisplayInput);
-  };
+    setIsDisplayInput(!isDisplayInput)
+  }
 
   const openAddConditionModal = () => {
     if (!conditionData.nameOfPoint) {
-      return;
+      return
     }
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   return (
     <div className="rounded-2xs input-wrapper relative mb-3 w-full max-w-[452px] select-none text-white">
@@ -125,7 +125,7 @@ const AddCondition = ({
         handleAddCondition={handleAddCondition}
       />
     </div>
-  );
-};
+  )
+}
 
-export default AddCondition;
+export default AddCondition

@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { config } from "@/utils/wallet/wagmi"
-import { Noto_Sans } from "next/font/google"
+import { Noto_Sans, Archivo } from "next/font/google"
 import UnitapProvider from "@/context"
 import Progressbar from "@/components/progress"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -18,8 +18,9 @@ import EventContextProvider from "@/context/eventProvider"
 import { ToastContainer } from "react-toastify"
 
 import "react-toastify/dist/ReactToastify.css"
+import Header from "./components/Header"
 
-const notoSansFont = Noto_Sans({
+const archivoFont = Archivo({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   display: "swap",
   adjustFontFallback: false,
@@ -27,7 +28,7 @@ const notoSansFont = Noto_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Unitap",
+  title: "Symmio | Points Program",
   description: "Bright ID faucet",
 }
 
@@ -40,13 +41,14 @@ export default async function RootLayout({
 
   return (
     <html lang="en" dir="ltr" className="dark">
-      <body className={`dark:bg-gray10 dark:text-white ${notoSansFont}`}>
+      <body className={`dark:bg-body dark:text-white ${archivoFont}`}>
         <Providers initialState={initialState}>
           <UnitapProvider>
             <StyledJsxRegistry>
               <EventContextProvider>
                 <div id="app">
-                  <main className="flex min-h-[calc(100vh)] flex-col">
+                  <Header />
+                  <main className="flex mx-auto container min-h-[calc(100vh)] mt-16 flex-col">
                     {children}
                   </main>
                 </div>

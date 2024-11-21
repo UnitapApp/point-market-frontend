@@ -6,7 +6,7 @@ import { useOutsideClick } from "@/utils/hooks/dom"
 import { getFaucetListServer } from "@/utils/serverApis"
 import { useWalletAccount } from "@/utils/wallet"
 import { SetStateAction, useEffect, useMemo, useRef, useState } from "react"
-import { ConditionDataProps } from "../page"
+import { ConditionDataProps } from "../page.old"
 
 interface Props {
   setConditionData: React.Dispatch<React.SetStateAction<ConditionDataProps>>
@@ -41,7 +41,7 @@ const ChainList = ({ setConditionData, conditionData }: Props) => {
     return chainList.filter((chain) =>
       chain.chainName
         .toLocaleLowerCase()
-        .includes(searchPhrase.toLocaleLowerCase())
+        .includes(searchPhrase.toLocaleLowerCase()),
     )
   }, [chainList, searchPhrase])
 
