@@ -41,7 +41,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" dir="ltr" className="dark">
-      <body className={`dark:bg-body dark:text-white ${archivoFont}`}>
+      <body className={`dark:bg-body dark:text-white ${archivoFont.className}`}>
         <Providers initialState={initialState}>
           <UnitapProvider>
             <StyledJsxRegistry>
