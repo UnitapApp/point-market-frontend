@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import {
   Table,
   TableHeader,
@@ -9,62 +9,51 @@ import {
   TableRow,
   TableCell,
   SortDescriptor,
+  Pagination,
 } from "@nextui-org/react"
 import { numberWithCommas } from "@/utils"
 import Image from "next/image"
 import { CiUser, CiWallet } from "react-icons/ci"
-import { FaUser } from "react-icons/fa6"
+import pointsData from "@/components/points.json"
 
 const columns = [
   { name: "Rank", uid: "rank" },
-  { name: "ENS / Wallet Address", uid: "address" },
-  { name: "uPnL", uid: "upnl" },
-  { name: "Points", uid: "points" },
+  { name: "ENS / Wallet Address", uid: "user" },
+  { name: "uPnL", uid: "Point" },
+  { name: "Points", uid: "total_volume" },
 ]
 
 export default function LeaderboardTable() {
-  const data = [
-    {
-      id: 1,
-      address: "0xB8F4846aCE41d3763bEe47c7C04a43f526ac3bc7",
-      upnl: 312324,
-      points: 3232323,
-      rank: 1,
-    },
-    {
-      id: 2,
-      address: "0xB8F4846aCE41d3763bEe47c7C04a43f526ac3bc7",
-      upnl: 312324,
-      points: 3232323,
-      rank: 2,
-    },
-    {
-      id: 3,
-      address: "0xB8F4846aCE41d3763bEe47c7C04a43f526ac3bc7",
-      upnl: 312324,
-      points: 3232323,
-      rank: 3,
-    },
-    {
-      id: 4,
-      address: "0xB8F4846aCE41d3763bEe47c7C04a43f526ac3bc7",
-      ens: "Ali Maktabi",
-      upnl: 312324,
-      points: 3232323,
-      rank: 4,
-    },
-  ]
+  const dataItems = useMemo(
+    () =>
+      pointsData
+        .sort((a, b) => a.Point - b.Point)
+        .map((item, key) => ({ ...item, rank: key + 1, id: key })),
+    [],
+  )
+  const rowsPerPage = 15
+
+  const [page, setPage] = useState(1)
+
+  const data = useMemo(() => {
+    const start = (page - 1) * rowsPerPage
+    const end = start + rowsPerPage
+
+    return dataItems.slice(start, end)
+  }, [page])
 
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "rank",
     direction: "ascending",
   })
 
+  const pages = Math.ceil(pointsData.length / rowsPerPage)
+
   const renderCell = React.useCallback((item: any, columnKey: string) => {
     const cellValue = item[columnKey]
 
     switch (columnKey) {
-      case "address":
+      case "user":
         if (item.ens) {
           return (
             <span className="flex items-center gap-2">
@@ -75,7 +64,7 @@ export default function LeaderboardTable() {
 
         return (
           <span className="flex items-center gap-2">
-            <CiWallet size={25} /> {item.address.slice(0, 32) + "..."}
+            <CiWallet size={25} /> {item.user.slice(0, 32) + "..."}
           </span>
         )
 
@@ -98,10 +87,10 @@ export default function LeaderboardTable() {
           </div>
         )
 
-      case "upnl":
-        return `$ ${numberWithCommas(item.upnl)}`
+      case "Point":
+        return `$ ${numberWithCommas(item.Point)}`
 
-      case "points":
+      case "total_volume":
         return <span className="text-white">{numberWithCommas(cellValue)}</span>
 
       default:
@@ -136,6 +125,19 @@ export default function LeaderboardTable() {
   return (
     <Table
       // isCompact
+      bottomContent={
+        <div className="flex w-full justify-center">
+          <Pagination
+            isCompact
+            showControls
+            showShadow
+            color="secondary"
+            page={page}
+            total={pages}
+            onChange={(page) => setPage(page)}
+          />
+        </div>
+      }
       onSortChange={setSortDescriptor}
       radius="none"
       removeWrapper
