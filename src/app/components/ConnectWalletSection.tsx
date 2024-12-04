@@ -5,6 +5,8 @@ import { shortenAddress } from "@/utils"
 import { useWalletAccount, useWalletConnection } from "@/utils/wallet"
 import { FaAngleDown } from "react-icons/fa6"
 import { LuCrown } from "react-icons/lu"
+import data from "@/components/points.json"
+import { Address, isAddressEqual } from "viem"
 
 export default function ConnectWalletSection() {
   const { address } = useWalletAccount()
@@ -73,11 +75,17 @@ const WalletCard = () => {
 }
 
 const PointsCard = () => {
+  const { address } = useWalletAccount()
+
+  const userPoints = data.find((item) =>
+    isAddressEqual(address!, item.user as Address),
+  )
+
   return (
     <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
       <div>
         <p className="text-informary">POINTS</p>
-        <h3 className="text-2xl mt-2 font-[500]">312,780</h3>
+        <h3 className="text-2xl mt-2 font-[500]">{userPoints?.Point ?? "-"}</h3>
       </div>
       <div className="ml-8"></div>
       {/* <div className="w-8 h-8 ml-10 bg-[#ffffff12] rounded-full grid place-items-center">
@@ -88,11 +96,18 @@ const PointsCard = () => {
 }
 
 const RankingCard = () => {
+  const { address } = useWalletAccount()
+
+  const user = data
+    .sort((a, b) => a.Point - b.Point)
+    .map((item, key) => ({ ...item, rank: key + 1, id: key }))
+    .find((item) => isAddressEqual(address!, item.user as Address))
+
   return (
     <div className="flex border-l border-divider-color border-r px-12 h-full items-center gap-4">
       <div>
         <p className="text-informary">RANK</p>
-        <h3 className="text-2xl mt-2 font-[500]">1578</h3>
+        <h3 className="text-2xl mt-2 font-[500]">{user?.rank ?? "-"}</h3>
       </div>
       <div className="ml-8"></div>
       {/* <div className="w-8 h-8 ml-10 bg-[#ffffff12] rounded-full grid place-items-center">
