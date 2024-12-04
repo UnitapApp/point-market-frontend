@@ -41,14 +41,14 @@ const ConnectWallet = () => {
   const { setIsWalletPromptOpen } = useGlobalContext()
 
   return (
-    <div className="flex col-span-3 ml-auto border-divider-color border-r px-12 h-full items-center gap-4">
+    <div className="flex relative col-span-3 ml-auto border-divider-color border-r px-12 h-full items-center gap-4">
+      <div className="bg-no-repeat bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-0 right-0 -translate-x-10 h-60"></div>{" "}
       <button
         onClick={() => setIsWalletPromptOpen(true)}
         className="py-6 font-semibold text-base text-black bg-primary px-14"
       >
         Connect Wallet
       </button>
-
       <div className="ml-8"></div>
     </div>
   )
