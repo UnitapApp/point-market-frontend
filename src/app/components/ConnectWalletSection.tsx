@@ -13,7 +13,7 @@ export default function ConnectWalletSection() {
 
   if (!address) {
     return (
-      <section className="bg-[#847D7D1C] relative grid grid-cols-4 items-center px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-40">
+      <section className="bg-[#847D7D1C] bg-[url('/assets/imgs/main/section-bg.svg')] relative grid grid-cols-4 items-center px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-40">
         <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
           <LuCrown size={30} />
           <h3 className="text-3xl font-[500]">Leaderboard</h3>
@@ -25,7 +25,8 @@ export default function ConnectWalletSection() {
   }
 
   return (
-    <section className="bg-[#847D7D1C] grid grid-cols-4 items-center px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-40">
+    <section className="bg-[#847D7D1C] relative grid grid-cols-4 items-center px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-40">
+      <div className="bg-no-repeat bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-1/2 -translate-x-10 w-80 h-20"></div>
       <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
         <LuCrown size={30} />
         <h3 className="text-3xl font-[500]">Leaderboard</h3>
@@ -35,10 +36,6 @@ export default function ConnectWalletSection() {
       <RankingCard />
     </section>
   )
-}
-
-const PointsSection = () => {
-  return <div className="">{}</div>
 }
 
 const ConnectWallet = () => {
