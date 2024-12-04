@@ -4,22 +4,36 @@ import { FC } from "react"
 import { cn, Select, SelectItem } from "@nextui-org/react"
 import { BsSearch } from "react-icons/bs"
 
-export default function SeasonTableHeader() {
+export default function SeasonTableHeader({
+  search,
+  setSearch,
+}: {
+  search: string
+  setSearch: (value: string) => void
+}) {
   return (
     <div className="flex items-center border-divider-color px-14 h-20">
       <SeasonTab seasonNumber={1} />
       <SeasonTab seasonNumber={2} />
-      <SearchBar />
+      <SearchBar search={search} setSearch={setSearch} />
       <DaysFilter />
     </div>
   )
 }
 
-const SearchBar = () => {
+const SearchBar = ({
+  search,
+  setSearch,
+}: {
+  search: string
+  setSearch: (value: string) => void
+}) => {
   return (
     <div className="relative flex-1 border-l border-divider-color h-full">
       <BsSearch className="absolute top-1/2 left-3 -translate-y-1/2" />
       <input
+        value={search ?? ""}
+        onChange={(e) => setSearch(e.target.value)}
         className="outline-none w-full p-5 pl-14 bg-transparent h-full border-none"
         type="text"
         placeholder="Search By Wallet Address"

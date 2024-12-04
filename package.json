@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cursorify/cursors": "^0.0.39",
+    "@cursorify/react": "^0.0.39",
     "@ethersproject/providers": "^5.7.2",
     "@metamask/logo": "^3.1.2",
     "@nextui-org/react": "^2.4.6",

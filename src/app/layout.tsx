@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { config } from "@/utils/wallet/wagmi"
-import { Noto_Sans, Archivo } from "next/font/google"
+import { Archivo } from "next/font/google"
+
 import UnitapProvider from "@/context"
 import Progressbar from "@/components/progress"
 import { SpeedInsights } from "@vercel/speed-insights/next"

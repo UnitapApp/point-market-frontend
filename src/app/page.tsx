@@ -1,11 +1,16 @@
+"use client"
+
 import Image from "next/image"
 import ConnectWalletSection from "./components/ConnectWalletSection"
 import SeasonTableHeader from "./components/SeasonTableHeader"
 import LeaderboardTable from "./components/LeaderboardTable"
 import LearnMoreSection from "./components/LearnMoreSection"
 import SeasonsSection from "./components/SeasonsSection"
+import { useState } from "react"
 
 export default function HomePage() {
+  const [search, setSearch] = useState("")
+
   return (
     <div>
       <div className="flex items-center px-44 justify-between">
@@ -24,9 +29,9 @@ export default function HomePage() {
       </div>
 
       <ConnectWalletSection />
-      <SeasonTableHeader />
+      <SeasonTableHeader search={search} setSearch={setSearch} />
 
-      <LeaderboardTable />
+      <LeaderboardTable search={search} setSearch={setSearch} />
 
       <LearnMoreSection />
       <SeasonsSection />

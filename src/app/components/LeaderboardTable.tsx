@@ -26,13 +26,22 @@ const columns = [
   { name: "Points", uid: "total_volume" },
 ]
 
-export default function LeaderboardTable() {
+export default function LeaderboardTable({
+  search,
+  setSearch,
+}: {
+  search: string
+  setSearch: (value: string) => void
+}) {
   const dataItems = useMemo(
     () =>
       pointsData
+        .filter((item) =>
+          item.user.toLowerCase().includes(search.toLowerCase()),
+        )
         .sort((a, b) => a.Point - b.Point)
         .map((item, key) => ({ ...item, rank: key + 1, id: key })),
-    [],
+    [search],
   )
   const rowsPerPage = 15
 
@@ -43,7 +52,7 @@ export default function LeaderboardTable() {
     const end = start + rowsPerPage
 
     return dataItems.slice(start, end)
-  }, [page])
+  }, [page, dataItems])
 
   const { address } = useWalletAccount()
 
@@ -52,7 +61,7 @@ export default function LeaderboardTable() {
     direction: "ascending",
   })
 
-  const pages = Math.ceil(pointsData.length / rowsPerPage)
+  const pages = Math.ceil(dataItems.length / rowsPerPage)
 
   const renderCell = React.useCallback((item: any, columnKey: string) => {
     const cellValue = item[columnKey]
