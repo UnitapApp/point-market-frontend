@@ -10,11 +10,14 @@ import {
   TableCell,
   SortDescriptor,
   Pagination,
+  cn,
 } from "@nextui-org/react"
 import { numberWithCommas } from "@/utils"
 import Image from "next/image"
 import { CiUser, CiWallet } from "react-icons/ci"
 import pointsData from "@/components/points.json"
+import { useWalletAccount } from "@/utils/wallet"
+import { isAddressEqual } from "viem"
 
 const columns = [
   { name: "Rank", uid: "rank" },
@@ -42,6 +45,8 @@ export default function LeaderboardTable() {
     return dataItems.slice(start, end)
   }, [page])
 
+  const { address } = useWalletAccount()
+
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "rank",
     direction: "ascending",
@@ -64,7 +69,8 @@ export default function LeaderboardTable() {
 
         return (
           <span className="flex items-center gap-2">
-            <CiWallet size={25} /> {item.user.slice(0, 32) + "..."}
+            <CiWallet size={25} />
+            {item.user.slice(0, 14) + "..." + item.user.slice(30, 42)}
           </span>
         )
 
@@ -166,7 +172,14 @@ export default function LeaderboardTable() {
       </TableHeader>
       <TableBody emptyContent={"No users found"} items={data}>
         {(item: any) => (
-          <TableRow key={item.id}>
+          <TableRow
+            className={cn(
+              address && isAddressEqual(address, item.user)
+                ? "bg-stone-800"
+                : "",
+            )}
+            key={item.id}
+          >
             {(columnKey) => (
               <TableCell align="center">
                 {renderCell(item, columnKey as string)}

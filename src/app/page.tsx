@@ -8,7 +8,7 @@ import SeasonsSection from "./components/SeasonsSection"
 export default function HomePage() {
   return (
     <div>
-      <div className="flex items-center px-32 justify-between">
+      <div className="flex items-center px-44 justify-between">
         <div>
           <p className="text-informary">
             // Welcome to <strong className="text-white"> Season #2!</strong>
