@@ -23,7 +23,7 @@ const columns = [
   { name: "Rank", uid: "rank" },
   { name: "ENS / Wallet Address", uid: "user" },
   { name: "uPnL", uid: "Point" },
-  { name: "Points", uid: "total_volume" },
+  { name: "Total Volume", uid: "total_volume" },
 ]
 
 export default function LeaderboardTable({
@@ -103,7 +103,7 @@ export default function LeaderboardTable({
         )
 
       case "Point":
-        return `$ ${numberWithCommas(item.Point)}`
+        return `${numberWithCommas(item.Point)}`
 
       case "total_volume":
         return <span className="text-white">{numberWithCommas(cellValue)}</span>
