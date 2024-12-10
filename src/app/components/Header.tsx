@@ -13,7 +13,9 @@ export function HeaderLink({ href, title }: { href: string; title: string }) {
 export default function Header() {
   return (
     <header className="h-20 border-b absolute top-0 left-0 right-0 text-sm backdrop-blur-sm border-[#847D7D4D] px-20 flex items-center gap-10">
-      <Image src="/imgs/logo.svg" alt="Symmio" width={170} height={40} />
+      <Link href="/">
+        <Image src="/imgs/logo.svg" alt="Symmio" width={170} height={40} />
+      </Link>
 
       <div className="flex items-center gap-5 text-body-text">
         <HeaderLink href="/symmio" title="Build on Symmio" />

@@ -22,7 +22,7 @@ import { isAddressEqual } from "viem"
 const columns = [
   { name: "Rank", uid: "rank" },
   { name: "ENS / Wallet Address", uid: "user" },
-  { name: "uPnL", uid: "Point" },
+  { name: "Points", uid: "Point" },
   { name: "Total Volume", uid: "total_volume" },
 ]
 
