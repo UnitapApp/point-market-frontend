@@ -12,7 +12,7 @@ export default function SeasonTableHeader({
   setSearch: (value: string) => void
 }) {
   return (
-    <div className="flex items-center border-divider-color px-14 h-20">
+    <div className="flex flex-col lg:flex-row gap-y-2 items-center border-divider-color px-0 lg:px-14 h-auto lg:h-20">
       <SeasonTab seasonNumber={1} />
       <SeasonTab seasonNumber={2} />
       <SearchBar search={search} setSearch={setSearch} />

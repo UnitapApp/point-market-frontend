@@ -61,7 +61,7 @@ const SeasonOneTabsSection = () => {
       fullWidth
     >
       <Tab title="OVERVIEW">
-        <div className="relative flex items-center justify-evenly h-[512]">
+        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 right-0" />
 
           <Image
@@ -82,7 +82,7 @@ const SeasonOneTabsSection = () => {
         </div>
       </Tab>
       <Tab title="TOTAL POINTS AWARDED">
-        <div className="relative flex items-center justify-evenly h-[512]">
+        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 left-1/2" />
 
           <Image
@@ -102,7 +102,7 @@ const SeasonOneTabsSection = () => {
         </div>
       </Tab>
       <Tab title="HOW DO I EARN POINTS?">
-        <div className="relative flex items-center justify-evenly h-[512]">
+        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 right-1/2" />
 
           <Image
@@ -132,7 +132,7 @@ const SeasonOneTabsSection = () => {
         </div>
       </Tab>
       <Tab title="DO POINTS = $SYMM?">
-        <div className="relative flex items-center justify-evenly h-[512]">
+        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 left-1/2 -translate-x-1/2" />
 
           <Image

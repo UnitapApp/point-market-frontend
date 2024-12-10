@@ -49,7 +49,7 @@ export default async function RootLayout({
               <EventContextProvider>
                 <div id="app">
                   <Header />
-                  <main className="flex min-h-[calc(100vh)] mt-16 flex-col">
+                  <main className="flex min-h-[calc(100vh)] w-screen overflow-x-hidden mt-16 flex-col">
                     {children}
                   </main>
                 </div>

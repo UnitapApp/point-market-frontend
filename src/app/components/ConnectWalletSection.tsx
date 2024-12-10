@@ -13,7 +13,7 @@ export default function ConnectWalletSection() {
 
   if (!address) {
     return (
-      <section className="bg-[#847D7D1C] relative grid grid-cols-4 items-center px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-40">
+      <section className="bg-[#847D7D1C] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center px-0 md:px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-auto lg:h-40">
         <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
           <LuCrown size={30} />
           <h3 className="text-3xl font-[500]">Leaderboard</h3>
@@ -25,7 +25,7 @@ export default function ConnectWalletSection() {
   }
 
   return (
-    <section className="bg-[#847D7D1C] relative grid grid-cols-4 items-center px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-40">
+    <section className="bg-[#847D7D1C] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center px-0 md:px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-auto lg:h-40">
       <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
         <LuCrown size={30} />
         <h3 className="text-3xl font-[500]">Leaderboard</h3>

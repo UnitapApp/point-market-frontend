@@ -13,9 +13,9 @@ export default function HomePage() {
 
   return (
     <div>
-      <div className="flex items-center px-44 justify-between">
+      <div className="flex flex-wrap items-center px-1 lg:px-44 justify-between">
         <div>
-          <p className="text-informary">
+          <p className="text-informary text-center">
             // Welcome to <strong className="text-white"> Season #2!</strong>
           </p>
           <h3 className="font-semibold mt-5 text-5xl">Symmio Points Program</h3>
