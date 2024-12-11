@@ -14,11 +14,13 @@ export default function HomePage() {
   return (
     <div>
       <div className="flex flex-wrap items-center px-1 lg:px-44 justify-between">
-        <div>
+        <div className="lg:w-auto w-full">
           <p className="text-informary text-center">
             // Welcome to <strong className="text-white"> Season #2!</strong>
           </p>
-          <h3 className="font-semibold mt-5 text-5xl">Symmio Points Program</h3>
+          <h3 className="font-semibold mt-5 text-center mb-2 text-2xl lg:text-5xl">
+            Symmio Points Program
+          </h3>
         </div>
         <Image
           src="/imgs/main/donut.svg"
