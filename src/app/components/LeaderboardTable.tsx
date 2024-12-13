@@ -103,10 +103,10 @@ export default function LeaderboardTable({
         )
 
       case "Point":
-        return `${numberWithCommas(item.Point)}`
+        return `${item.Point}`
 
       case "total_volume":
-        return <span className="text-white">{numberWithCommas(cellValue)}</span>
+        return <span className="text-white">{cellValue}</span>
 
       default:
         return cellValue ?? "-"
