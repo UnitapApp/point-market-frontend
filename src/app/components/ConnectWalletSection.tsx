@@ -96,7 +96,7 @@ const RankingCard = () => {
   const { address } = useWalletAccount()
 
   const user = data
-    .sort((a, b) => a.Point - b.Point)
+    .sort((a, b) => b.Point - a.Point)
     .map((item, key) => ({ ...item, rank: key + 1, id: key }))
     .find((item) => isAddressEqual(address!, item.user as Address))
 

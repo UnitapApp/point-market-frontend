@@ -39,7 +39,7 @@ export default function LeaderboardTable({
         .filter((item) =>
           item.user.toLowerCase().includes(search.toLowerCase()),
         )
-        .sort((a, b) => a.Point - b.Point)
+        .sort((a, b) => b.Point - a.Point)
         .map((item, key) => ({ ...item, rank: key + 1, id: key })),
     [search],
   )
