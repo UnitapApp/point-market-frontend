@@ -6,10 +6,23 @@ import SeasonTableHeader from "./components/SeasonTableHeader"
 import LeaderboardTable from "./components/LeaderboardTable"
 import LearnMoreSection from "./components/LearnMoreSection"
 import SeasonsSection from "./components/SeasonsSection"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import pointsData from "@/components/points.json"
+import axios from "axios"
 
 export default function HomePage() {
   const [search, setSearch] = useState("")
+  const [activeSeason, setActiveSeason] = useState(1)
+  const [data, setData] = useState<any[]>([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await axios.get("/api/points")
+
+      setData(data.data)
+    }
+    fetchData()
+  }, [])
 
   return (
     <div>
@@ -31,10 +44,28 @@ export default function HomePage() {
       </div>
 
       <ConnectWalletSection />
-      <SeasonTableHeader search={search} setSearch={setSearch} />
 
-      <LeaderboardTable search={search} setSearch={setSearch} />
-
+      <SeasonTableHeader
+        search={search}
+        setSearch={setSearch}
+        activeSeason={activeSeason}
+        setActiveSeason={setActiveSeason}
+      />
+      {activeSeason === 2 ? (
+        <LeaderboardTable
+          key={2}
+          data={data}
+          search={search}
+          setSearch={setSearch}
+        />
+      ) : (
+        <LeaderboardTable
+          key={1}
+          data={pointsData}
+          search={search}
+          setSearch={setSearch}
+        />
+      )}
       <LearnMoreSection />
       <SeasonsSection />
     </div>

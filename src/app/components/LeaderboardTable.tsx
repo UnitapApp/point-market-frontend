@@ -12,10 +12,8 @@ import {
   Pagination,
   cn,
 } from "@nextui-org/react"
-import { numberWithCommas } from "@/utils"
 import Image from "next/image"
 import { CiUser, CiWallet } from "react-icons/ci"
-import pointsData from "@/components/points.json"
 import { useWalletAccount } from "@/utils/wallet"
 import { isAddressEqual } from "viem"
 
@@ -29,7 +27,9 @@ const columns = [
 export default function LeaderboardTable({
   search,
   setSearch,
+  data: pointsData,
 }: {
+  data: any[]
   search: string
   setSearch: (value: string) => void
 }) {

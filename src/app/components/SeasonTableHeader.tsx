@@ -7,14 +7,26 @@ import { BsSearch } from "react-icons/bs"
 export default function SeasonTableHeader({
   search,
   setSearch,
+  activeSeason,
+  setActiveSeason,
 }: {
   search: string
   setSearch: (value: string) => void
+  activeSeason: number
+  setActiveSeason: (season: number) => void
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-y-2 items-center border-divider-color px-0 lg:px-14 h-auto lg:h-20">
-      <SeasonTab seasonNumber={1} />
-      <SeasonTab seasonNumber={2} />
+      <SeasonTab
+        seasonNumber={1}
+        isActive={activeSeason === 1}
+        onClick={() => setActiveSeason(1)}
+      />
+      <SeasonTab
+        seasonNumber={2}
+        isActive={activeSeason === 2}
+        onClick={() => setActiveSeason(2)}
+      />
       <SearchBar search={search} setSearch={setSearch} />
       <DaysFilter />
     </div>
@@ -62,12 +74,14 @@ const DaysFilter = () => {
   )
 }
 
-const SeasonTab: FC<{ seasonNumber: number; isActive?: boolean }> = ({
-  seasonNumber,
-  isActive,
-}) => {
+const SeasonTab: FC<{
+  seasonNumber: number
+  isActive?: boolean
+  onClick: () => void
+}> = ({ seasonNumber, isActive, onClick }) => {
   return (
     <button
+      onClick={onClick}
       className={cn(
         "flex border-l border-divider-color px-16 h-full items-center gap-4",
         isActive ? "text-white" : "text-body-text",
