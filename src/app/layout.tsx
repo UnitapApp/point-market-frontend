@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify"
 
 import "react-toastify/dist/ReactToastify.css"
 import Header from "./components/Header"
+import Footer from "./components/Footer"
 
 const archivoFont = Archivo({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -31,6 +32,7 @@ const archivoFont = Archivo({
 export const metadata: Metadata = {
   title: "Symmio | Points Program",
   description: "Bright ID faucet",
+  icons: ["/favicon.svg"],
 }
 
 export default async function RootLayout({
@@ -38,7 +40,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const initialState = cookieToInitialState(config, headers().get("cookie"))
+  const initialState = cookieToInitialState(
+    config,
+    (await headers()).get("cookie"),
+  )
 
   return (
     <html lang="en" dir="ltr" className="dark">
@@ -52,6 +57,7 @@ export default async function RootLayout({
                   <main className="flex min-h-[calc(100vh)] w-screen overflow-x-hidden mt-16 flex-col">
                     {children}
                   </main>
+                  <Footer />
                 </div>
               </EventContextProvider>
 

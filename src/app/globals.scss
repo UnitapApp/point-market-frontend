@@ -12,8 +12,6 @@
 }
 
 @layer base {
-
-  // TYPOGRAPHY
   h1 {
     @apply text-3xl font-semibold items-center;
   }
@@ -39,7 +37,6 @@
     -webkit-text-fill-color: transparent;
   }
 
-  // FLEX SIZES
   .flex--1 {
     flex: 1;
   }
@@ -61,7 +58,8 @@
   font-family: DigitalNumbers;
   font-style: normal;
   font-weight: normal;
-  src: URL("/assets/font/DigitalNumbers/DigitalNumbers-Regular.ttf") format("truetype");
+  src: URL("/assets/font/DigitalNumbers/DigitalNumbers-Regular.ttf")
+    format("truetype");
 }
 
 input::-webkit-outer-spin-button,
@@ -79,8 +77,6 @@ input {
 input::-webkit-file-upload-button {
   display: none;
 }
-
-
 
 .gradient-text-hackaThon {
   background: linear-gradient(
@@ -118,8 +114,10 @@ input::-webkit-file-upload-button {
   );
 }
 
-
-
 .background-dashboard {
-  background: radial-gradient(41.18% 123.32% at 31.24% 50.09%, #1A1A2A 0%, #10101B 100%);
+  background: radial-gradient(
+    41.18% 123.32% at 31.24% 50.09%,
+    #1a1a2a 0%,
+    #10101b 100%
+  );
 }

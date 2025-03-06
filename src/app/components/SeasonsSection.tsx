@@ -111,7 +111,7 @@ const SeasonOneTabsSection = () => {
             src="/imgs/main/wireframe-section.svg"
             alt="wireframe vectors"
           />
-          <p className="max-w-[600px] text-informary leading-loose">
+          <div className="max-w-[600px] text-informary leading-loose">
             <p>
               In Season 2, points will be awarded for activity across the Symmio
               ecosystem such as:{" "}
@@ -128,7 +128,7 @@ const SeasonOneTabsSection = () => {
               communities
             </p>
             <p>A complete detailed list can be found here.</p>
-          </p>
+          </div>
         </div>
       </Tab>
       <Tab title="DO POINTS = $SYMM?">

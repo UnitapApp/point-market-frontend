@@ -11,7 +11,11 @@ import { useState } from "react"
 import { cn } from "@nextui-org/react"
 
 export function HeaderLink({ href, title }: { href: string; title: string }) {
-  return <Link href={href}>{title}</Link>
+  return (
+    <Link className="hover:text-white transition-colors" href={href}>
+      {title}
+    </Link>
+  )
 }
 
 export default function Header() {
@@ -29,34 +33,47 @@ export default function Header() {
         </div>
 
         <div className="md:flex items-center hidden gap-5 text-body-text">
-          <HeaderLink href="/symmio" title="Build on Symmio" />
-          <HeaderLink href="/symmio" title="Hedger" />
-          <HeaderLink href="/symmio" title="Protocol" />
-          <HeaderLink href="/symmio" title="Points" />
+          <HeaderLink href="https://symm.io" title="Build on Symmio" />
+          <HeaderLink
+            href="https://docs.symm.io/protocol-architecture/technical-documentation/solver-docs"
+            title="Hedger"
+          />
+          <HeaderLink
+            href="https://www.symm.io/protocol-introduction"
+            title="Protocol"
+          />
+          <HeaderLink href="/" title="Points" />
         </div>
 
         <div className="ml-0 lg:ml-auto hidden lg:flex items-center gap-10">
-          <Link href="#" className="flex gap-2 items-center">
+          <Link
+            href="https://github.com/SYMM-IO/docs/blob/main/Whitepaper/SYMMIO_paper_0_8.pdf"
+            target="_blank"
+            className="flex gap-2 items-center hover:text-primary transition-colors"
+          >
             <span>White Paper</span>
             <FaRegFileLines />
           </Link>
-          <Link href="#" className="flex text-primary gap-2 items-center">
+          <Link
+            href="https://www.symm.io/frontends"
+            className="flex text-primary gap-2 items-center"
+          >
             <span>Trade</span>
             <GoArrowUpRight size={20} className="-mb-1" />
           </Link>
         </div>
 
         <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
-          <Link href="#">
+          <Link target="_blank" href="docs.symm.io">
             <SiGitbook />
           </Link>
-          <Link href="#">
+          <Link target="_blank" href="https://medium.com/symmio-publication">
             <PiMediumLogoFill size={20} />
           </Link>
-          <Link href="#">
+          <Link target="_blank" href="https://twitter.com/symm_io">
             <BsTwitterX size={18} />
           </Link>
-          <Link href="#">
+          <Link target="_blank" href="https://discord.gg/symmio">
             <FaDiscord size={20} />
           </Link>
         </div>
@@ -69,24 +86,47 @@ export default function Header() {
             : "opacity-0 pointer-events-none",
         )}
       >
-        <Link href="#">
+        <Link
+          className="hover:text-white transition-colors"
+          target="_blank"
+          href="docs.symm.io"
+        >
           <SiGitbook />
         </Link>
-        <Link href="#">
+        <Link
+          className="hover:text-white transition-colors"
+          target="_blank"
+          href="https://medium.com/symmio-publication"
+        >
           <PiMediumLogoFill size={22} />
         </Link>
-        <Link href="#">
+        <Link
+          className="hover:text-white transition-colors"
+          target="_blank"
+          href="https://twitter.com/symm_io"
+        >
           <BsTwitterX size={20} />
         </Link>
-        <Link href="#">
+        <Link
+          className="hover:text-white transition-colors"
+          target="_blank"
+          href="https://discord.gg/symmio"
+        >
           <FaDiscord size={22} />
         </Link>
         <div className="flex gap-4 items-center">
-          <Link href="#" className="flex gap-2 items-center">
+          <Link
+            href="https://github.com/SYMM-IO/docs/blob/main/Whitepaper/SYMMIO_paper_0_8.pdf"
+            target="_blank"
+            className="flex gap-2 items-center hover:text-primary transition-colors"
+          >
             <span>White Paper</span>
             <FaRegFileLines />
           </Link>
-          <Link href="#" className="flex text-primary gap-2 items-center">
+          <Link
+            href="https://www.symm.io/frontends"
+            className="flex text-primary gap-2 items-center"
+          >
             <span>Trade</span>
             <GoArrowUpRight size={20} className="-mb-1" />
           </Link>
