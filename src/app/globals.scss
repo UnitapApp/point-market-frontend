@@ -1,7 +1,7 @@
-@import "../styles/buttons.scss";
-@import "../styles/cards.scss";
-@import "../styles/index.scss";
-@import "../styles/animations.scss";
+@use "../styles/buttons" as *;
+@use "../styles/cards" as *;
+@use "../styles/index" as *;
+@use "../styles/animations" as *;
 
 @tailwind base;
 @tailwind components;

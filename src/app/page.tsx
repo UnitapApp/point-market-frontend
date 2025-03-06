@@ -29,7 +29,8 @@ export default function HomePage() {
       <div className="flex flex-wrap md:flex-nowrap items-center px-1 lg:px-44 justify-center md:justify-between">
         <div className="lg:w-auto text-center md:text-left w-full">
           <p className="text-informary">
-            // Welcome to <strong className="text-white"> Season #2!</strong>
+            {"// Welcome to "}
+            <strong className="text-white"> Season #2!</strong>
           </p>
           <h3 className="font-semibold mt-5 mb-2 text-2xl lg:text-5xl">
             Symmio Points Program

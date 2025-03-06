@@ -1,6 +1,5 @@
 "use client"
 
-import { useOutsideClick } from "@/utils/hooks/dom"
 import RoutePath from "@/utils/routes"
 import Image from "next/image"
 import Link from "next/link"
