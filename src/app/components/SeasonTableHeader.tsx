@@ -84,7 +84,7 @@ const SeasonTab: FC<{
       onClick={onClick}
       className={cn(
         "flex border-l border-divider-color px-16 h-full items-center gap-4",
-        isActive ? "text-white" : "text-body-text",
+        isActive ? "text-white border-b-3" : "text-body-text",
       )}
     >
       Season #{seasonNumber}
