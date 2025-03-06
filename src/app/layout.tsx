@@ -31,7 +31,7 @@ const archivoFont = Archivo({
 
 export const metadata: Metadata = {
   title: "Symmio | Points Program",
-  description: "Bright ID faucet",
+  description: "Symmio Points Program",
   icons: ["/favicon.svg"],
 }
 
