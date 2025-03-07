@@ -2,13 +2,15 @@
 
 import { useGlobalContext } from "@/context/globalProvider"
 import { shortenAddress } from "@/utils"
-import { useWalletAccount, useWalletConnection } from "@/utils/wallet"
+import { useWalletAccount } from "@/utils/wallet"
 import { FaAngleDown } from "react-icons/fa6"
 import { LuCrown } from "react-icons/lu"
-import data from "@/components/points.json"
 import { Address, isAddressEqual } from "viem"
+import { FC } from "react"
 
-export default function ConnectWalletSection() {
+export type ActiveDataProps = { activeData: any[] }
+
+export default function ConnectWalletSection({ activeData }: ActiveDataProps) {
   const { address } = useWalletAccount()
 
   if (!address) {
@@ -31,8 +33,8 @@ export default function ConnectWalletSection() {
         <h3 className="text-3xl font-[500]">Leaderboard</h3>
       </div>
       <WalletCard />
-      <PointsCard />
-      <RankingCard />
+      <PointsCard activeData={activeData} />
+      <RankingCard activeData={activeData} />
     </section>
   )
 }
@@ -72,10 +74,10 @@ const WalletCard = () => {
   )
 }
 
-const PointsCard = () => {
+const PointsCard: FC<ActiveDataProps> = ({ activeData }) => {
   const { address } = useWalletAccount()
 
-  const userPoints = data.find((item) =>
+  const userPoints = activeData.find((item) =>
     isAddressEqual(address!, item.user as Address),
   )
 
@@ -94,10 +96,10 @@ const PointsCard = () => {
   )
 }
 
-const RankingCard = () => {
+const RankingCard: FC<ActiveDataProps> = ({ activeData }) => {
   const { address } = useWalletAccount()
 
-  const user = data
+  const user = activeData
     .sort((a, b) => b.Point - a.Point)
     .map((item, key) => ({ ...item, rank: key + 1, id: key }))
     .find((item) => isAddressEqual(address!, item.user as Address))

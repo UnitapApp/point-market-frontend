@@ -44,7 +44,9 @@ export default function HomePage() {
         />
       </div>
 
-      <ConnectWalletSection />
+      <ConnectWalletSection
+        activeData={activeSeason === 1 ? pointsData : data}
+      />
 
       <SeasonTableHeader
         search={search}
