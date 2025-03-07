@@ -1,24 +1,43 @@
 "use client"
 
 import { FC } from "react"
-import { FaAngleDown } from "react-icons/fa"
-import { cn, Tab, Tabs } from "@nextui-org/react"
+import { Accordion, AccordionItem, cn, Tab, Tabs } from "@nextui-org/react"
 import Image from "next/image"
 
 export default function SeasonsSection() {
   return (
     <div>
-      <SeasonSection
-        season="Season #1"
-        text="Lorem ipsum is a dummy or placeholder text "
-      />
-      <SeasonSection
-        isActive
-        season="Season #2"
-        text="Lorem ipsum is a dummy or placeholder text "
-      />
-
-      <SeasonOneTabsSection />
+      <Accordion
+        defaultExpandedKeys={["2"]}
+        className="border-none"
+        variant="light"
+      >
+        <AccordionItem
+          key="1"
+          aria-label="Accordion 1"
+          title={
+            <SeasonSection
+              season="Season #1"
+              text=" June 3, 2024 - November 4, 2024"
+            />
+          }
+        >
+          <SeasonOneTabsSection />
+        </AccordionItem>
+        <AccordionItem
+          key="2"
+          aria-label="Accordion 2"
+          className="border-none"
+          title={
+            <SeasonSection
+              season="Season #2"
+              text="November 4 - June 4 2025 "
+            />
+          }
+        >
+          <SeasonTwoTabsSection />
+        </AccordionItem>
+      </Accordion>
     </div>
   )
 }
@@ -31,24 +50,24 @@ const SeasonSection: FC<{
   return (
     <div
       className={cn(
-        "flex border-t px-12 border-[#847D7D4D] border-l-4 border-l-transparent gap-2 items-center h-24",
+        "flex border-none px-12 border-[#847D7D4D] border-l-4 border-l-transparent gap-2 items-center h-24",
         isActive ? "bg-[#847D7D33] border-l-primary" : "",
       )}
     >
       <strong className="text-white">{season}</strong>
       <p className="text-informary">{text}</p>
-      <FaAngleDown
+      {/* <FaAngleDown
         className={cn(
           "ml-auto transition-all",
           isActive ? "rotate-180 text-primary" : "",
         )}
         size={20}
-      />
+      /> */}
     </div>
   )
 }
 
-const SeasonOneTabsSection = () => {
+const SeasonTwoTabsSection = () => {
   return (
     <Tabs
       variant="underlined"
@@ -148,6 +167,60 @@ const SeasonOneTabsSection = () => {
             program, ensuring that points reflect genuine engagement rather than
             exploitative behavior
           </p>
+        </div>
+      </Tab>
+    </Tabs>
+  )
+}
+
+const SeasonOneTabsSection = () => {
+  return (
+    <Tabs
+      variant="underlined"
+      className=""
+      classNames={{
+        tab: "py-7 border-r first:border-l border-divider-color",
+        tabList: "gap-0 px-12 border-b border-divider",
+        cursor: "w-full",
+      }}
+      fullWidth
+    >
+      <Tab title="OVERVIEW">
+        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
+          <Backlight className="absolute bottom-0 right-0" />
+
+          <Image
+            width="279"
+            height="351"
+            src="/imgs/main/human-section.svg"
+            alt="human vectors"
+          />
+          <p className="max-w-[600px] text-informary leading-loose">
+            The Season 1 points program was quietly launched on June 3, 2024,
+            with an initial announcement on Discord, linked here. Season 1 ended
+            on November 4, 2024, with the launch of Symmio’s Season 2 Points
+            Program.
+          </p>
+        </div>
+      </Tab>
+      <Tab title="TOTAL POINTS AWARDED">
+        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
+          <Backlight className="absolute bottom-0 left-1/2" />
+
+          <Image
+            width="279"
+            height="351"
+            src="/imgs/main/union-section.svg"
+            alt="union"
+          />
+          <div>
+            <h3 className="text-3xl text-informary">In total</h3>
+            <h1 className="text-4xl mt-3 text-white">9,240,000</h1>
+            <p className="text-3xl mt-3 text-informary">
+              points were awarded for{" "}
+              <span className="text-primary">Season 1</span>.
+            </p>
+          </div>
         </div>
       </Tab>
     </Tabs>

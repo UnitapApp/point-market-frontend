@@ -68,7 +68,9 @@ export default function HomePage() {
         />
       )}
       <LearnMoreSection />
-      <SeasonsSection />
+      <div className="container mx-auto">
+        <SeasonsSection />
+      </div>
     </div>
   )
 }

@@ -33,7 +33,10 @@ export default function Header() {
         </div>
 
         <div className="md:flex items-center hidden gap-5 text-body-text">
-          <HeaderLink href="https://symm.io" title="Build on Symmio" />
+          <HeaderLink
+            href="https://docs.symm.io/building-on-symmio/builders-introduction"
+            title="Build on Symmio"
+          />
           <HeaderLink
             href="https://docs.symm.io/protocol-architecture/technical-documentation/solver-docs"
             title="Hedger"
@@ -64,7 +67,7 @@ export default function Header() {
         </div>
 
         <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
-          <Link target="_blank" href="docs.symm.io">
+          <Link target="_blank" href="https://docs.symmio.foundation/">
             <SiGitbook />
           </Link>
           <Link target="_blank" href="https://medium.com/symmio-publication">
@@ -89,7 +92,7 @@ export default function Header() {
         <Link
           className="hover:text-white transition-colors"
           target="_blank"
-          href="docs.symm.io"
+          href="https://docs.symmio.foundation/"
         >
           <SiGitbook />
         </Link>

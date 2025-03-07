@@ -22,7 +22,7 @@ export default function Footer() {
                 </div>
               </a>
               <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
-                <Link target="_blank" href="docs.symm.io">
+                <Link target="_blank" href="https://docs.symmio.foundation/">
                   <SiGitbook />
                 </Link>
                 <Link
@@ -97,7 +97,7 @@ export default function Footer() {
               <div className=" text-stone-500 font-semibold">Take action</div>
               <div className="flex mt-5 flex-wrap gap-12">
                 <a
-                  href="https://docs.symm.io/building-on-symm-io/builders-introduction"
+                  href="https://docs.symm.io/building-on-symmio/builders-introduction"
                   target="_blank"
                   className="gap-2 brightness-[300%] hover:text-primary cursor-pointer no-underline transition-all duration-200 flex"
                 >

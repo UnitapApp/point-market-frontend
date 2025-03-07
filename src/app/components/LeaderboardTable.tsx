@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import {
   Table,
   TableHeader,
@@ -62,6 +62,12 @@ export default function LeaderboardTable({
   })
 
   const pages = Math.ceil(dataItems.length / rowsPerPage)
+
+  useEffect(() => {
+    if (page > pages) {
+      setPage(1)
+    }
+  }, [page, pages])
 
   const renderCell = React.useCallback((item: any, columnKey: string) => {
     const cellValue = item[columnKey]
