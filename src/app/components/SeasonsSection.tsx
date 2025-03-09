@@ -197,9 +197,16 @@ const SeasonOneTabsSection = () => {
           />
           <p className="max-w-[600px] text-informary leading-loose">
             The Season 1 points program was quietly launched on June 3, 2024,
-            with an initial announcement on Discord, linked here. Season 1 ended
-            on November 4, 2024, with the launch of Symmio’s Season 2 Points
-            Program.
+            with an initial announcement on Discord,{" "}
+            <a
+              href="https://discord.com/channels/1106198408202563665/1108401306672046170/1247199457070813355"
+              className="text-blue-500"
+              target="_blank"
+            >
+              linked here
+            </a>
+            . Season 1 ended on November 4, 2024, with the launch of Symmio’s
+            Season 2 Points Program.
           </p>
         </div>
       </Tab>
