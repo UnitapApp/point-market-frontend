@@ -1,16 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   compiler: {
+  compiler: {
     styledComponents: true,
   },
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination: 'https://point-market-47a320ab4ef6.herokuapp.com/api/:path*'
-      }
+        source: "/api/:path*",
+        destination:
+          "https://point-market-47a320ab4ef6.herokuapp.com/api/:path*",
+      },
     ]
   },
+  experimental: {},
   images: {
     remotePatterns: [
       {
@@ -19,6 +21,6 @@ const nextConfig = {
       },
     ],
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

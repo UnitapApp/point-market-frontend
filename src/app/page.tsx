@@ -45,7 +45,7 @@ export default function HomePage() {
       </div>
 
       <ConnectWalletSection
-        activeData={activeSeason === 1 ? pointsData : data}
+        activeData={activeSeason === 2 ? (pointsData as any[]) : data}
       />
 
       <SeasonTableHeader
@@ -57,14 +57,14 @@ export default function HomePage() {
       {activeSeason === 2 ? (
         <LeaderboardTable
           key={2}
-          data={data}
+          data={pointsData as any[]}
           search={search}
           setSearch={setSearch}
         />
       ) : (
         <LeaderboardTable
           key={1}
-          data={pointsData}
+          data={data}
           search={search}
           setSearch={setSearch}
         />
