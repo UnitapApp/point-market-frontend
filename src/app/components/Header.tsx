@@ -32,7 +32,7 @@ export default function Header() {
           <FaBars onClick={() => setIsHeaderOpen(!isHeaderOpen)} size={24} />
         </div>
 
-        <div className="md:flex items-center hidden gap-5 text-body-text">
+        <div className="ml-0 lg:ml-auto hidden lg:flex items-center gap-10">
           <HeaderLink href="https://docs.symmio.foundation/" title="Docs" />
           <HeaderLink
             href="https://app.symmio.foundation/staking"
@@ -42,24 +42,6 @@ export default function Header() {
             href="https://app.symmio.foundation/staking"
             title="Points"
           />
-        </div>
-
-        <div className="ml-0 lg:ml-auto hidden lg:flex items-center gap-10">
-          <Link
-            href="https://github.com/SYMM-IO/docs/blob/main/Whitepaper/SYMMIO_paper_0_8.pdf"
-            target="_blank"
-            className="flex gap-2 items-center hover:text-primary transition-colors"
-          >
-            <span>White Paper</span>
-            <FaRegFileLines />
-          </Link>
-          <Link
-            href="https://www.symm.io/frontends"
-            className="flex text-primary gap-2 items-center"
-          >
-            <span>Trade</span>
-            <GoArrowUpRight size={20} className="-mb-1" />
-          </Link>
         </div>
 
         <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
