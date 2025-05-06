@@ -15,8 +15,8 @@ export default function ConnectWalletSection({ activeData }: ActiveDataProps) {
 
   if (!address) {
     return (
-      <section className="bg-[#847D7D1C] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center px-0 md:px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-auto lg:h-40">
-        <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
+      <section className="bg-[#847D7D1C] p-3 md:p-0 relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center px-0 md:px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-auto lg:h-40">
+        <div className="flex border-l justify-center border-divider-color px-12 h-full items-center gap-4">
           <LuCrown size={30} />
           <h3 className="text-3xl font-[500]">Leaderboard</h3>
         </div>
@@ -27,8 +27,8 @@ export default function ConnectWalletSection({ activeData }: ActiveDataProps) {
   }
 
   return (
-    <section className="bg-[#847D7D1C] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center px-0 md:px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-auto lg:h-40">
-      <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
+    <section className="bg-[#847D7D1C] relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center justify-center px-0 md:px-14 -mt-14 backdrop-blur-sm border-t border-b border-divider-color h-auto lg:h-40">
+      <div className="flex justify-center border-l border-divider-color px-12 h-full items-center gap-4">
         <LuCrown size={30} />
         <h3 className="text-3xl font-[500]">Leaderboard</h3>
       </div>
@@ -43,17 +43,17 @@ const ConnectWallet = () => {
   const { setIsWalletPromptOpen } = useGlobalContext()
 
   return (
-    <div className="flex relative col-span-3 ml-auto border-divider-color border-r px-12 h-full items-center gap-4">
+    <div className="flex relative mt-5 md:mt-0 justify-center col-span-3 ml-auto border-divider-color border-r px-12 h-full items-center gap-4">
       <div className="bg-no-repeat -z-10 bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-0 right-0 -translate-x-10 h-60"></div>{" "}
       <button
         onClick={() => {
           setIsWalletPromptOpen(true)
         }}
-        className="py-6 font-semibold text-base text-black bg-primary px-14"
+        className="py-6 flex-1 w-full md:w-auto font-semibold text-base text-black bg-primary px-14"
       >
         Connect Wallet
       </button>
-      <div className="ml-8"></div>
+      <div className="md:ml-8"></div>
     </div>
   )
 }
@@ -62,7 +62,7 @@ const WalletCard = () => {
   const { address } = useWalletAccount()
 
   return (
-    <div className="flex border-l border-divider-color px-12 h-full items-center gap-4">
+    <div className="flex border-l justify-center border-divider-color px-12 h-full items-center gap-4">
       <div>
         <p className="text-informary">WALLET</p>
         <h3 className="text-2xl mt-2 font-[500]">{shortenAddress(address)}</h3>

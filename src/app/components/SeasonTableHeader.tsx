@@ -17,16 +17,18 @@ export default function SeasonTableHeader({
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-y-2 items-center border-divider-color px-0 lg:px-14 h-auto lg:h-20">
-      <SeasonTab
-        seasonNumber={1}
-        isActive={activeSeason === 1}
-        onClick={() => setActiveSeason(1)}
-      />
-      <SeasonTab
-        seasonNumber={2}
-        isActive={activeSeason === 2}
-        onClick={() => setActiveSeason(2)}
-      />
+      <div className="flex items-center gap-2">
+        <SeasonTab
+          seasonNumber={1}
+          isActive={activeSeason === 1}
+          onClick={() => setActiveSeason(1)}
+        />
+        <SeasonTab
+          seasonNumber={2}
+          isActive={activeSeason === 2}
+          onClick={() => setActiveSeason(2)}
+        />
+      </div>
       <SearchBar search={search} setSearch={setSearch} />
       <DaysFilter />
     </div>
@@ -41,7 +43,7 @@ const SearchBar = ({
   setSearch: (value: string) => void
 }) => {
   return (
-    <div className="relative flex-1 border-l border-divider-color h-full">
+    <div className="relative w-full border-l border-divider-color h-full">
       <BsSearch className="absolute top-1/2 left-3 -translate-y-1/2" />
       <input
         value={search ?? ""}
@@ -56,7 +58,7 @@ const SearchBar = ({
 
 const DaysFilter = () => {
   return (
-    <div className="border-l border-r px-4 flex items-center gap-4 border-divider-color h-full">
+    <div className="border-l border-r px-4 py-2 md:py-0 w-full justify-between flex items-center gap-4 border-divider-color h-full">
       <span className="text-informary">Filter By</span>
 
       <Select variant="bordered" className="w-32" selectedKeys={["30"]}>
