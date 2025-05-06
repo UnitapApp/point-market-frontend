@@ -44,7 +44,7 @@ export default function Header() {
           />
         </div>
 
-        <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
+        {/* <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
           <Link target="_blank" href="https://docs.symmio.foundation/">
             <SiGitbook />
           </Link>
@@ -57,7 +57,7 @@ export default function Header() {
           <Link target="_blank" href="https://discord.gg/symmio">
             <FaDiscord size={20} />
           </Link>
-        </div>
+        </div> */}
       </header>
       <div
         className={cn(
