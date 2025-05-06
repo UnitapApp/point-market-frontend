@@ -25,7 +25,7 @@ export default function Header() {
     <>
       <header className="h-20 border-b md:absolute static top-0 left-0 right-0 text-sm backdrop-blur-sm border-[#847D7D4D] px-3 lg:px-20 flex items-center gap-10">
         <Link href="/">
-          <Image src="/imgs/logo.svg" alt="Symmio" width={170} height={40} />
+          <Image src="/Logo white.svg" alt="Symmio" width={170} height={40} />
         </Link>
 
         <div className="block ml-auto lg:hidden">
@@ -33,19 +33,15 @@ export default function Header() {
         </div>
 
         <div className="md:flex items-center hidden gap-5 text-body-text">
+          <HeaderLink href="https://docs.symmio.foundation/" title="Docs" />
           <HeaderLink
-            href="https://docs.symm.io/building-on-symmio/builders-introduction"
-            title="Build on Symmio"
+            href="https://app.symmio.foundation/staking"
+            title="Staking"
           />
           <HeaderLink
-            href="https://docs.symm.io/protocol-architecture/technical-documentation/solver-docs"
-            title="Hedger"
+            href="https://app.symmio.foundation/staking"
+            title="Points"
           />
-          <HeaderLink
-            href="https://www.symm.io/protocol-introduction"
-            title="Protocol"
-          />
-          <HeaderLink href="/" title="Points" />
         </div>
 
         <div className="ml-0 lg:ml-auto hidden lg:flex items-center gap-10">
