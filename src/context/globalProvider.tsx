@@ -6,6 +6,7 @@ import {
   HaveBrightIdAccountModalState,
 } from "@/types"
 import { EmptyCallback } from "@/utils"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import {
   FC,
   PropsWithChildren,
@@ -27,6 +28,8 @@ export type GlobalContextType = {
   isWalletPromptOpen: boolean
   setIsWalletPromptOpen: (arg: boolean) => void
 }
+
+const queryClient = new QueryClient()
 
 export const GlobalContext = createContext<GlobalContextType>({
   openBrightIdModal: EmptyCallback,
@@ -50,7 +53,7 @@ export const GlobalContextProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const [haveBrightIdAccountModalStatus, setHaveBrightIdAccountModalStatus] =
     useState<HaveBrightIdAccountModalState>(
-      HaveBrightIdAccountModalState.CLOSED
+      HaveBrightIdAccountModalState.CLOSED,
     )
 
   const [isWalletPromptOpen, setIsWalletPromptOpen] = useState(false)
@@ -95,7 +98,7 @@ export const GlobalContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setIsWalletPromptOpen,
       }}
     >
-      {children}
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </GlobalContext.Provider>
   )
 }

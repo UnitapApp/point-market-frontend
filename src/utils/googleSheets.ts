@@ -5,10 +5,9 @@ export async function getSheetData(): Promise<
   { user: string; total_volume: number; Point: number }[]
 > {
   try {
-    const SHEET_ID = "1c1WZ0EsWheeWLgL3xHvBusFcaMXsnUdwF15MbnG7KEo"
-    const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`
-
-    const response = await fetch(url)
+    const response = await fetch(
+      "https://raw.githubusercontent.com/SYMMIO/home/refs/heads/main/SymmPoints_season1%20-%20Sheet1.csv",
+    )
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }

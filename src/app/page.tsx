@@ -9,20 +9,16 @@ import SeasonsSection from "./components/SeasonsSection"
 import { useEffect, useState } from "react"
 import pointsData from "@/components/points.json"
 import axios from "axios"
+import { useQuery } from "@tanstack/react-query"
 
 export default function HomePage() {
   const [search, setSearch] = useState("")
   const [activeSeason, setActiveSeason] = useState(1)
-  const [data, setData] = useState<any[]>([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await axios.get("/api/points")
-
-      setData(data.data)
-    }
-    fetchData()
-  }, [])
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["points"],
+    queryFn: () => axios.get("/api/points").then((res) => res.data),
+  })
 
   return (
     <div>
@@ -45,7 +41,7 @@ export default function HomePage() {
       </div>
 
       <ConnectWalletSection
-        activeData={activeSeason === 2 ? (pointsData as any[]) : data}
+        activeData={activeSeason === 2 ? (pointsData as any[]) : (data ?? [])}
       />
 
       <SeasonTableHeader
@@ -63,8 +59,8 @@ export default function HomePage() {
         />
       ) : (
         <LeaderboardTable
-          key={1}
-          data={data}
+          key={(data ?? [])?.length}
+          data={data ?? []}
           search={search}
           setSearch={setSearch}
         />
