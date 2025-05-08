@@ -17,7 +17,7 @@ export default function SeasonTableHeader({
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-y-2 items-center border-divider-color px-0 lg:px-14 h-auto lg:h-20">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center mb-2 h-full gap-2">
         <SeasonTab
           seasonNumber={1}
           isActive={activeSeason === 1}
