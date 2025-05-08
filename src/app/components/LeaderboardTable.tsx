@@ -16,6 +16,7 @@ import Image from "next/image"
 import { CiUser, CiWallet } from "react-icons/ci"
 import { useWalletAccount } from "@/utils/wallet"
 import { isAddressEqual } from "viem"
+import { numberWithCommas } from "@/utils"
 
 const columns = [
   { name: "Rank", uid: "rank" },
@@ -109,10 +110,12 @@ export default function LeaderboardTable({
         )
 
       case "Point":
-        return `${item.Point}`
+        return `${numberWithCommas(item.Point)}`
 
       case "total_volume":
-        return <span className="text-white">{cellValue}</span>
+        return (
+          <span className="text-white">${numberWithCommas(cellValue)}</span>
+        )
 
       default:
         return cellValue ?? "-"

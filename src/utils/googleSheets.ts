@@ -17,7 +17,9 @@ export async function getSheetData(): Promise<
 
     return rows
       .map((row) => {
-        const [user, total_volume, points] = row.split(",")
+        // user,total_volume,Percentage,Point
+
+        const [user, total_volume, percentage, points] = row.split(",")
         return {
           user,
           total_volume: parseFloat(total_volume) || 0,
@@ -25,6 +27,7 @@ export async function getSheetData(): Promise<
         }
       })
       .sort((a, b) => b.Point - a.Point)
+      .map((item, key) => ({ ...item, id: key + 1 }))
   } catch (error) {
     console.error("Error fetching sheet data:", error)
     return []
