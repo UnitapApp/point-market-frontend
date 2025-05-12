@@ -173,6 +173,7 @@ export default function LeaderboardTable({
       }}
       classNames={{
         ...classNames,
+        base: "overflow-x-auto",
       }}
       topContentPlacement="outside"
     >
