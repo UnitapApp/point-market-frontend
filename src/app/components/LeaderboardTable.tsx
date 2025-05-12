@@ -29,39 +29,59 @@ export default function LeaderboardTable({
   search,
   setSearch,
   data: pointsData,
+  daysToFilter,
 }: {
   data: any[]
   search: string
   setSearch: (value: string) => void
+  daysToFilter: number
 }) {
-  const dataItems = useMemo(
-    () =>
-      pointsData
-        .filter((item) =>
-          item.user.toLowerCase().includes(search.toLowerCase()),
-        )
-        .sort((a, b) => b.Point - a.Point)
-        .map((item, key) => ({ ...item, rank: key + 1, id: key })),
-    [search],
-  )
-  const rowsPerPage = 15
-
-  const [page, setPage] = useState(1)
-
-  const data = useMemo(() => {
-    const start = (page - 1) * rowsPerPage
-    const end = start + rowsPerPage
-
-    return dataItems.slice(start, end)
-  }, [page, dataItems])
-
-  const { address } = useWalletAccount()
-
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "rank",
     direction: "ascending",
   })
 
+  const dataItems = useMemo(() => {
+    let items = [...pointsData].map((item, key) => ({
+      ...item,
+      rank: key + 1,
+      id: key,
+    }))
+
+    // Filter by search
+    items = items.filter((item) =>
+      item.user.toLowerCase().includes(search.toLowerCase()),
+    )
+
+    // Sort by column
+    const { column, direction } = sortDescriptor
+    items.sort((a, b) => {
+      const first = a[column as keyof typeof a]
+      const second = b[column as keyof typeof b]
+      const cmp =
+        typeof first === "string" && typeof second === "string"
+          ? first.localeCompare(second)
+          : first < second
+            ? -1
+            : first > second
+              ? 1
+              : 0
+      return direction === "descending" ? -cmp : cmp
+    })
+
+    return items
+  }, [pointsData, search, sortDescriptor])
+
+  const rowsPerPage = 15
+  const [page, setPage] = useState(1)
+
+  const data = useMemo(() => {
+    const start = (page - 1) * rowsPerPage
+    const end = start + rowsPerPage
+    return dataItems.slice(start, end)
+  }, [page, dataItems])
+
+  const { address } = useWalletAccount()
   const pages = Math.ceil(dataItems.length / rowsPerPage)
 
   useEffect(() => {
@@ -82,14 +102,12 @@ export default function LeaderboardTable({
             </span>
           )
         }
-
         return (
           <span className="flex items-center gap-2">
             <CiWallet size={25} />
             {item.user.slice(0, 14) + "..." + item.user.slice(30, 42)}
           </span>
         )
-
       case "rank":
         if (cellValue < 4) {
           return (
@@ -102,21 +120,17 @@ export default function LeaderboardTable({
             />
           )
         }
-
         return (
           <div className="w-14 grid place-items-center h-8 rounded-2xl bg-[#847D7D4D] text-white">
             {cellValue}
           </div>
         )
-
       case "Point":
         return `${numberWithCommas(item.Point)}`
-
       case "total_volume":
         return (
           <span className="text-white">${numberWithCommas(cellValue)}</span>
         )
-
       default:
         return cellValue ?? "-"
     }
@@ -133,12 +147,9 @@ export default function LeaderboardTable({
       td: [
         "text-gray100 font-semibold",
         "border-b py-3 border-[#847D7D4D]",
-        // first
         "group-data-[first=true]:first:before:rounded-none",
         "group-data-[first=true]:last:before:rounded-none",
-        // middle
         "group-data-[middle=true]:before:rounded-none",
-        // last
         "group-data-[last=true]:first:before:rounded-none",
         "group-data-[last=true]:last:before:rounded-none",
       ],
@@ -148,7 +159,8 @@ export default function LeaderboardTable({
 
   return (
     <Table
-      // isCompact
+      sortDescriptor={sortDescriptor}
+      onSortChange={setSortDescriptor}
       bottomContent={
         <div className="flex w-full justify-center">
           <Pagination
@@ -162,10 +174,9 @@ export default function LeaderboardTable({
           />
         </div>
       }
-      onSortChange={setSortDescriptor}
       radius="none"
       removeWrapper
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Leaderboard table with sorting and pagination"
       checkboxesProps={{
         classNames: {
           wrapper: "after:bg-foreground after:text-background text-background",

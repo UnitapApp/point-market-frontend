@@ -20,6 +20,8 @@ export default function HomePage() {
     queryFn: () => axios.get("/api/points").then((res) => res.data),
   })
 
+  const [daysFilter, setDaysFilter] = useState(90)
+
   return (
     <div>
       <div className="flex flex-wrap md:flex-nowrap items-center px-1 lg:px-44 justify-center md:justify-between">
@@ -45,6 +47,8 @@ export default function HomePage() {
       />
 
       <SeasonTableHeader
+        daysFilter={daysFilter}
+        setDaysFilter={setDaysFilter}
         search={search}
         setSearch={setSearch}
         activeSeason={activeSeason}
@@ -56,6 +60,7 @@ export default function HomePage() {
           data={pointsData as any[]}
           search={search}
           setSearch={setSearch}
+          daysToFilter={daysFilter}
         />
       ) : (
         <LeaderboardTable
@@ -63,6 +68,7 @@ export default function HomePage() {
           data={data ?? []}
           search={search}
           setSearch={setSearch}
+          daysToFilter={daysFilter}
         />
       )}
       <LearnMoreSection />

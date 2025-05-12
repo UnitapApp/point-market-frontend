@@ -9,11 +9,15 @@ export default function SeasonTableHeader({
   setSearch,
   activeSeason,
   setActiveSeason,
+  daysFilter,
+  setDaysFilter,
 }: {
   search: string
   setSearch: (value: string) => void
   activeSeason: number
   setActiveSeason: (season: number) => void
+  daysFilter: number
+  setDaysFilter: (value: number) => void
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-y-2 items-center border-divider-color px-0 lg:px-14 h-auto lg:h-20">
@@ -30,7 +34,7 @@ export default function SeasonTableHeader({
         />
       </div>
       <SearchBar search={search} setSearch={setSearch} />
-      <DaysFilter />
+      <DaysFilter daysFilter={daysFilter} setDaysFilter={setDaysFilter} />
     </div>
   )
 }
@@ -56,12 +60,22 @@ const SearchBar = ({
   )
 }
 
-const DaysFilter = () => {
+const DaysFilter: FC<{
+  daysFilter: number
+  setDaysFilter: (value: number) => void
+}> = ({ daysFilter, setDaysFilter }) => {
   return (
     <div className="border-l border-r px-4 py-2 md:py-0 w-full justify-between flex items-center gap-4 border-divider-color h-full">
       <span className="text-informary">Filter By</span>
 
-      <Select variant="bordered" className="w-32" selectedKeys={["30"]}>
+      <Select
+        variant="bordered"
+        className="w-32"
+        selectedKeys={[daysFilter.toString()]}
+        onSelectionChange={(keys) =>
+          setDaysFilter(parseInt([...keys][0].toString()))
+        }
+      >
         <SelectItem key={30} value={30}>
           30 Days
         </SelectItem>
