@@ -30,11 +30,13 @@ export default function LeaderboardTable({
   setSearch,
   data: pointsData,
   daysToFilter,
+  season,
 }: {
   data: any[]
   search: string
   setSearch: (value: string) => void
   daysToFilter: number
+  season: number
 }) {
   const [sortDescriptor, setSortDescriptor] = useState<SortDescriptor>({
     column: "rank",
@@ -188,7 +190,14 @@ export default function LeaderboardTable({
       }}
       topContentPlacement="outside"
     >
-      <TableHeader className="bg-[#FF7A6E26]" columns={columns}>
+      <TableHeader
+        className="bg-[#FF7A6E26]"
+        columns={
+          season === 2
+            ? columns.filter((item) => item.uid !== "total_volume")
+            : columns
+        }
+      >
         {(column) => (
           <TableColumn
             className="bg-[#FF7A6E26]"

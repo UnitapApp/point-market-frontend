@@ -71,6 +71,7 @@ const DaysFilter: FC<{
       <Select
         variant="bordered"
         className="w-32"
+        isDisabled
         selectedKeys={[daysFilter.toString()]}
         onSelectionChange={(keys) =>
           setDaysFilter(parseInt([...keys][0].toString()))

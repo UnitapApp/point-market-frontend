@@ -61,12 +61,14 @@ export default function HomePage() {
           search={search}
           setSearch={setSearch}
           daysToFilter={daysFilter}
+          season={2}
         />
       ) : (
         <LeaderboardTable
           key={(data ?? [])?.length}
           data={data ?? []}
           search={search}
+          season={1}
           setSearch={setSearch}
           daysToFilter={daysFilter}
         />
