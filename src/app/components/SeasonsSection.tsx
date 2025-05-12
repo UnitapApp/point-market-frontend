@@ -91,9 +91,9 @@ const SeasonTwoTabsSection = () => {
           />
           <p className="max-w-[600px] text-informary leading-loose">
             Starting on November 4, 2024, Season 2 will continue with daily
-            rewards of <strong className="text-white">60,000</strong> points to
+            rewards of <strong className="text-white">33,962</strong> points to
             drive growth and engagement across the Symmio ecosystem and will go
-            on for 4 months or till{" "}
+            on for 7 months or till{" "}
             <strong className="text-white">$150,000,000</strong> OI, whatever
             happens earlier, Season 2 will also continue to run after TGE
             happened. 
@@ -146,7 +146,17 @@ const SeasonTwoTabsSection = () => {
               Engaging with Symmio on Twitter, Discord, and other online
               communities
             </p>
-            <p>A complete detailed list can be found here.</p>
+            <p>
+              A complete detailed list can be found{" "}
+              <a
+                href="https://docs.symmio.foundation/token-related/tokenomics/symmio-points/season-2"
+                className="text-blue-500"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                here.
+              </a>
+            </p>
           </div>
         </div>
       </Tab>
