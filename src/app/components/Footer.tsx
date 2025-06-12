@@ -11,7 +11,10 @@ export default function Footer() {
         <div className="z-[1] flex-col flex relative w-full">
           <div className="flex-col flex min-h-16 pr-20 pt-24 items-stretch">
             <div className="flex text-white justify-between items-center">
-              <a href="#" className="navbar-logo-wrap-copy w-inline-block">
+              <a
+                href="https://www.symmio.foundation/"
+                className="navbar-logo-wrap-copy w-inline-block"
+              >
                 <div className="">
                   <img
                     src="https://cdn.prod.website-files.com/673b709e9411d4683cbf9172/673dfee63ebb2ee7f1ff3f07_Logo%20white.svg"

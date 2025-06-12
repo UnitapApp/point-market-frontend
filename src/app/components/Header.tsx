@@ -24,7 +24,7 @@ export default function Header() {
   return (
     <>
       <header className="h-20 border-b md:absolute static top-0 left-0 right-0 text-sm backdrop-blur-sm border-[#847D7D4D] px-3 lg:px-20 flex items-center gap-10">
-        <Link href="/">
+        <Link href="https://www.symmio.foundation/">
           <Image src="/Logo white.svg" alt="Symmio" width={170} height={40} />
         </Link>
 
