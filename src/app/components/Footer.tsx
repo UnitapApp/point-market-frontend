@@ -47,7 +47,10 @@ export default function Footer() {
             <div className="footer-link-block-v10-copy">
               <div className="text-stone-500 font-semibold">Learn more</div>
               <div className="flex mt-5 flex-wrap gap-12">
-                <a href="#" className="footer-link-block-v10 w-inline-block">
+                <a
+                  href="https://docs.symm.io/"
+                  className="footer-link-block-v10 w-inline-block"
+                >
                   <div className="">Protocol Introduction</div>
                 </a>
                 <a
