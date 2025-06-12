@@ -12,7 +12,12 @@ import AddNewWalletFailed from "./addNewWalletFailed"
 import LoginSuccessBody from "./LoginSuccess"
 import { parseCookies } from "@/utils/cookies"
 import { useDisconnect } from "wagmi"
-import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/shared/shadcn/components/ui/dialog"
 
 export enum ConnectionProvider {
   Metamask,
@@ -177,17 +182,18 @@ export const ConnectWalletModal = () => {
   }, [disconnect, isWalletPromptOpen])
 
   return (
-    <Modal
-      isOpen={isWalletPromptOpen && !isPending}
+    <Dialog
+      open={isWalletPromptOpen && !isPending}
       onOpenChange={() => setIsWalletPromptOpen(false)}
-      className="bg-gray20"
     >
-      <ModalContent>
-        <ModalHeader className="justify-center">{title}</ModalHeader>
-        <ModalBody className="flex flex-col items-center justify-center pt-12">
+      <DialogContent className="">
+        <DialogHeader>
+          <DialogTitle className="text-center">{title}</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col items-center justify-center pt-12">
           <RenderWalletBody setWalletTitle={setWalletTitle} />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }

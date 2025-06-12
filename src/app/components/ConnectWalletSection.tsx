@@ -8,7 +8,11 @@ import { LuCrown, LuLogOut } from "react-icons/lu"
 import { Address, isAddressEqual } from "viem"
 import { FC, useState } from "react"
 import { useDisconnect } from "wagmi"
-import { Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/shared/shadcn/components/ui/popover"
 
 export type ActiveDataProps = { activeData: any[] }
 
@@ -65,21 +69,9 @@ const WalletCard = () => {
   const { disconnect } = useDisconnect()
 
   return (
-    <Popover
-      showArrow={false}
-      backdrop="opaque"
-      classNames={{
-        base: ["before:bg-default-200"],
-        content: [
-          "border border-default-200",
-          "bg-gradient-to-br from-white to-default-300",
-          "dark:from-default-100 dark:to-default-50",
-        ],
-      }}
-      placement="bottom"
-    >
-      <PopoverTrigger className="cursor-pointer">
-        <div className="relative flex border-l justify-center border-divider-color px-12 h-full items-center gap-4">
+    <Popover>
+      <PopoverTrigger asChild>
+        <div className="relative flex border-l justify-center border-divider-color px-12 h-full items-center gap-4 cursor-pointer">
           <div>
             <p className="text-informary">WALLET</p>
             <h3 className="text-2xl mt-2 font-[500]">
@@ -87,26 +79,20 @@ const WalletCard = () => {
             </h3>
           </div>
           <div className="ml-10 w-8 h-8 grid place-items-center cursor-pointer">
-            <FaAngleDown className={`transition-transform `} />
+            <FaAngleDown className="transition-transform" />
           </div>
         </div>
       </PopoverTrigger>
-      <PopoverContent>
-        {(titleProps) => (
-          <div className="px-1 py-2">
-            <div className="w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
-              <button
-                onClick={() => {
-                  disconnect()
-                }}
-                className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-white hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg"
-              >
-                <LuLogOut className="w-5 h-5 flex-shrink-0" />
-                <span>Disconnect Wallet</span>
-              </button>
-            </div>
-          </div>
-        )}
+      <PopoverContent className="w-48 p-0 bg-gray-800 rounded-lg shadow-xl border border-gray-700">
+        <button
+          onClick={() => {
+            disconnect()
+          }}
+          className="flex items-center gap-3 w-full px-4 py-3 text-sm font-medium text-white hover:bg-gray-700 transition-colors first:rounded-t-lg last:rounded-b-lg"
+        >
+          <LuLogOut className="w-5 h-5 flex-shrink-0" />
+          <span>Disconnect Wallet</span>
+        </button>
       </PopoverContent>
     </Popover>
   )

@@ -1,7 +1,12 @@
 "use client"
 
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/shared/shadcn/components/ui/dialog"
 import Icon from "@/components/ui/Icon"
-import Modal from "@/components/ui/Modal/modal"
 import { useWalletManagementContext } from "@/context/walletProvider"
 import { useWalletAccount, useWalletConnection } from "@/utils/wallet"
 import { useDisconnect } from "wagmi"
@@ -28,22 +33,24 @@ const AddWalletModal = () => {
   }, [isAddModalOpen, setHoldUserLogout])
 
   return (
-    <Modal
-      size="small"
-      title={
-        duplicateWalletRaiseError ? "Add New Wallet" : "Add Or Switch Wallet"
-      }
-      closeModalHandler={() => setIsAddModalOpen(false)}
-      isOpen={isAddModalOpen}
-    >
-      <div className="flex flex-col items-center justify-center pt-12">
-        {addModalState === "complete" ? (
-          <WalletAddSuccess />
-        ) : (
-          <AddWalletPrompt />
-        )}
-      </div>
-    </Modal>
+    <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>
+            {duplicateWalletRaiseError
+              ? "Add New Wallet"
+              : "Add Or Switch Wallet"}
+          </DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col items-center justify-center pt-12">
+          {addModalState === "complete" ? (
+            <WalletAddSuccess />
+          ) : (
+            <AddWalletPrompt />
+          )}
+        </div>
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -76,7 +83,7 @@ export const AddWalletPrompt = () => {
           disconnect()
           connect({
             connector: connectors.find(
-              (connector) => connector.id === "injected"
+              (connector) => connector.id === "injected",
             )!,
           })
         }}
@@ -90,7 +97,7 @@ export const AddWalletPrompt = () => {
           disconnect()
           connect({
             connector: connectors.find(
-              (connector) => connector.id === "walletConnect"
+              (connector) => connector.id === "walletConnect",
             )!,
           })
         }}

@@ -39,7 +39,7 @@ export default function Header() {
             title="Staking"
           />
           <HeaderLink
-            href="https://app.symmio.foundation/staking"
+            href="https://docs.symmio.foundation/token-related/tokenomics/symmio-points"
             title="Points"
           />
         </div>
