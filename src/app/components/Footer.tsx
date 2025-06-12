@@ -112,7 +112,10 @@ export default function Footer() {
                     className="w-3"
                   />
                 </a>
-                <a href="#" className="footer-link-block-v10 w-inline-block">
+                <a
+                  href="https://www.symm.io/frontends"
+                  className="footer-link-block-v10 w-inline-block"
+                >
                   <div className="">Start Trading</div>
                 </a>
                 <a
