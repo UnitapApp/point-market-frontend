@@ -10,8 +10,14 @@ export default function LearnMoreSection() {
       </h3>
 
       <div className="text-informary mt-10">
-        Symmetry Labs A.G. does not operate its own Frontend to ensure
-        censorship resistance of the underlying bilateral & intent technology.
+        The Symmio Points Program was stealth-launched on June 3, 2024, with a
+        subtle announcement on Discord - designed to reward loyal users for
+        their meaningful contributions.
+      </div>
+      <div className="text-informary mt-10">
+        Points reflect each user's ongoing activity and commitment across the
+        Symmio ecosystem, serving as a transparent record of genuine engagement
+        throughout the campaign.
       </div>
     </div>
   )
