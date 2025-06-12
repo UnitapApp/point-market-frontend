@@ -15,9 +15,9 @@ export default function LearnMoreSection() {
         their meaningful contributions.
       </div>
       <div className="text-informary mt-10">
-        Points reflect each user's ongoing activity and commitment across the
-        Symmio ecosystem, serving as a transparent record of genuine engagement
-        throughout the campaign.
+        Points reflect each user{"'"}s ongoing activity and commitment across
+        the Symmio ecosystem, serving as a transparent record of genuine
+        engagement throughout the campaign.
       </div>
     </div>
   )
