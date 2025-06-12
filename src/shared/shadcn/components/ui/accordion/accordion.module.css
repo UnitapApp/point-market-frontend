@@ -1,0 +1,53 @@
+.accordion-primitive-header {
+  @apply relative;
+
+  &::before {
+    @apply absolute left-[12.5px] top-0 h-1/3 w-[1px] content-[''];
+    background-color: hsl(var(--border) / 0.3);
+  }
+
+  &::after {
+    @apply absolute bottom-0 left-[12.5px] h-1/3 w-[1px] content-[''];
+    background-color: hsl(var(--border) / 0.3);
+  }
+}
+
+.accordion-primitive-trigger {
+  &::before {
+    @apply absolute left-[7.5px] top-1/2 h-3 w-3 -translate-y-1/2 rounded-full content-[''];
+
+    background-color: hsl(var(--border) / 0.3);
+  }
+
+  &:hover::before {
+    @apply border-2 border-solid;
+    border-color: hsl(var(--primary));
+  }
+
+  &[data-state="open"]::before {
+    @apply transition-all;
+    background-color: hsl(var(--primary));
+    box-shadow: 0 0 25px 12px hsl(var(--primary) / 0.4);
+  }
+}
+
+.accordion-primitive-content {
+  &::before {
+    @apply absolute left-[12.5px] top-0 h-full w-[1px] content-[''];
+    background-color: hsl(var(--border) / 0.3);
+  }
+}
+
+.accordion-base {
+  & > *:first-child > *:first-child::before {
+    @apply hidden;
+  }
+
+  & > *:last-child > *:first-child::after {
+    @apply hidden;
+  }
+
+  & > *:last-child > .accordion-primitive-content::before {
+    @apply hidden;
+  }
+}

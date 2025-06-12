@@ -1,41 +1,42 @@
 "use client"
 
 import { FC } from "react"
-import { Accordion, AccordionItem, cn, Tab, Tabs } from "@nextui-org/react"
+import { cn, Tab, Tabs } from "@nextui-org/react"
 import Image from "next/image"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/shared/shadcn/components/ui/accordion/accordion"
 
 export default function SeasonsSection() {
   return (
     <div>
-      <Accordion
-        defaultExpandedKeys={["2"]}
-        className="border-none"
-        variant="light"
-      >
-        <AccordionItem
-          key="1"
-          aria-label="Accordion 1"
-          title={
+      <Accordion type="single">
+        <AccordionItem value="1" aria-label="Accordion 1">
+          <AccordionTrigger>
             <SeasonSection
-              season="Season #1"
+              season="Season 1"
               text=" June 3, 2024 - November 4, 2024"
             />
-          }
-        >
-          <SeasonOneTabsSection />
+          </AccordionTrigger>
+          <AccordionContent className="bg-transparent">
+            <SeasonOneTabsSection />
+          </AccordionContent>
         </AccordionItem>
+
         <AccordionItem
-          key="2"
+          value="2"
           aria-label="Accordion 2"
           className="border-none"
-          title={
-            <SeasonSection
-              season="Season #2"
-              text="November 4 - June 4 2025 "
-            />
-          }
         >
-          <SeasonTwoTabsSection />
+          <AccordionTrigger>
+            <SeasonSection season="Season 2" text="November 4 - June 4 2025 " />
+          </AccordionTrigger>
+          <AccordionContent className="bg-transparent">
+            <SeasonTwoTabsSection />
+          </AccordionContent>
         </AccordionItem>
       </Accordion>
     </div>
@@ -73,9 +74,9 @@ const SeasonTwoTabsSection = () => {
       variant="underlined"
       className=""
       classNames={{
-        tab: "py-7 border-r first:border-l border-divider-color",
+        tab: "py-7 border-r first:border-l border-divider-color data-[selected=true]:text-primary data-[selected=true]:font-bold",
         tabList: "gap-0 px-12 border-b border-divider",
-        cursor: "w-full",
+        cursor: "w-full bg-primary",
       }}
       fullWidth
     >
@@ -189,9 +190,9 @@ const SeasonOneTabsSection = () => {
       variant="underlined"
       className=""
       classNames={{
-        tab: "py-7 border-r first:border-l border-divider-color",
+        tab: "py-7 border-r first:border-l border-divider-color data-[selected=true]:text-primary data-[selected=true]:font-bold",
         tabList: "gap-0 px-12 border-b border-divider",
-        cursor: "w-full",
+        cursor: "w-full bg-primary",
       }}
       fullWidth
     >

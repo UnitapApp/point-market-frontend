@@ -21,7 +21,7 @@ export default function SeasonTableHeader({
 }) {
   return (
     <div className="flex flex-col lg:flex-row gap-y-2 items-center border-divider-color px-0 lg:px-14 h-auto lg:h-20">
-      <div className="flex items-center mb-2 h-full gap-2">
+      <div className="flex items-center mb-2 lg:mb-0 h-full">
         <SeasonTab
           seasonNumber={1}
           isActive={activeSeason === 1}
@@ -34,7 +34,7 @@ export default function SeasonTableHeader({
         />
       </div>
       <SearchBar search={search} setSearch={setSearch} />
-      <DaysFilter daysFilter={daysFilter} setDaysFilter={setDaysFilter} />
+      {/* <DaysFilter daysFilter={daysFilter} setDaysFilter={setDaysFilter} /> */}
     </div>
   )
 }
@@ -47,7 +47,7 @@ const SearchBar = ({
   setSearch: (value: string) => void
 }) => {
   return (
-    <div className="relative w-full border-l border-divider-color h-full">
+    <div className="relative w-full border-l flex-1 border-divider-color h-full">
       <BsSearch className="absolute top-1/2 left-3 -translate-y-1/2" />
       <input
         value={search ?? ""}
@@ -66,7 +66,7 @@ const DaysFilter: FC<{
 }> = ({ daysFilter, setDaysFilter }) => {
   return (
     <div className="border-l border-r px-4 py-2 md:py-0 w-full justify-between flex items-center gap-4 border-divider-color h-full">
-      <span className="text-informary">Filter By</span>
+      {/* <span className="text-informary">Filter By</span>
 
       <Select
         variant="bordered"
@@ -86,7 +86,7 @@ const DaysFilter: FC<{
         <SelectItem key={90} value={30}>
           90 Days
         </SelectItem>
-      </Select>
+      </Select> */}
     </div>
   )
 }
@@ -100,11 +100,14 @@ const SeasonTab: FC<{
     <button
       onClick={onClick}
       className={cn(
-        "flex border-l border-divider-color px-16 h-full items-center gap-4",
-        isActive ? "text-white border-b-3" : "text-body-text",
+        "flex border-l min-h-16 border-divider-color px-16 h-full items-center gap-4",
+        "transition-all duration-200 ease-in-out",
+        isActive
+          ? "text-white border-b-3 border-b-primary bg-primary/10 font-medium"
+          : "text-body-text hover:bg-primary/5",
       )}
     >
-      Season #{seasonNumber}
+      Season {seasonNumber}
     </button>
   )
 }

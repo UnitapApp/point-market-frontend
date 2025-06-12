@@ -46,7 +46,7 @@ const ConnectWallet = () => {
 
   return (
     <div className="flex relative mt-5 md:mt-0 justify-center col-span-3 ml-auto border-divider-color border-r px-12 h-full items-center gap-4">
-      <div className="bg-no-repeat -z-10 bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-0 right-0 -translate-x-10 h-60"></div>{" "}
+      <div className="bg-no-repeat pointer-events-none -z-10 bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-0 right-0 -translate-x-10 h-60"></div>{" "}
       <button
         onClick={() => {
           setIsWalletPromptOpen(true)
