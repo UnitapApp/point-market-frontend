@@ -1,7 +1,7 @@
 "use client"
 
 import { FC } from "react"
-import { cn, Tab, Tabs } from "@nextui-org/react"
+import { cn } from "@nextui-org/react"
 import Image from "next/image"
 import {
   Accordion,
@@ -9,6 +9,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/shared/shadcn/components/ui/accordion/accordion"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/shared/shadcn/components/ui/tabs"
 
 export default function SeasonsSection() {
   return (
@@ -70,18 +76,25 @@ const SeasonSection: FC<{
 
 const SeasonTwoTabsSection = () => {
   return (
-    <Tabs
-      variant="underlined"
-      className=""
-      classNames={{
-        tab: "py-7 border-r first:border-l border-divider-color data-[selected=true]:text-primary data-[selected=true]:font-bold",
-        tabList: "gap-0 px-12 border-b border-divider",
-        cursor: "w-full bg-primary",
-      }}
-      fullWidth
-    >
-      <Tab title="OVERVIEW">
-        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
+    <Tabs defaultValue="overview" className="w-full">
+      <div className="w-full overflow-auto">
+        <TabsList className="w-full min-w-max md:grid md:grid-cols-4">
+          <TabsTrigger className="flex-1 px-4" value="overview">
+            OVERVIEW
+          </TabsTrigger>
+          <TabsTrigger className="flex-1 px-4" value="total">
+            TOTAL POINTS AWARDED
+          </TabsTrigger>
+          <TabsTrigger className="flex-1 px-4" value="earn">
+            HOW DO I EARN POINTS?
+          </TabsTrigger>
+          <TabsTrigger className="flex-1 px-4" value="points">
+            DO POINTS = $SYMM?
+          </TabsTrigger>
+        </TabsList>
+      </div>
+      <TabsContent value="overview">
+        <div className="relative flex flex-col md:flex-row gap-8 items-center justify-evenly min-h-[512px] p-4">
           <Backlight className="absolute bottom-0 right-0" />
 
           <Image
@@ -89,6 +102,7 @@ const SeasonTwoTabsSection = () => {
             height="351"
             src="/imgs/main/human-section.svg"
             alt="human vectors"
+            className="w-full max-w-[279px] h-auto"
           />
           <p className="max-w-[600px] text-informary leading-loose">
             Starting on November 4, 2024, Season 2 will continue with daily
@@ -100,8 +114,8 @@ const SeasonTwoTabsSection = () => {
             happened. 
           </p>
         </div>
-      </Tab>
-      <Tab title="TOTAL POINTS AWARDED">
+      </TabsContent>
+      <TabsContent value="total">
         <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 left-1/2" />
 
@@ -120,8 +134,8 @@ const SeasonTwoTabsSection = () => {
             </p>
           </div>
         </div>
-      </Tab>
-      <Tab title="HOW DO I EARN POINTS?">
+      </TabsContent>
+      <TabsContent value="earn">
         <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 right-1/2" />
 
@@ -160,8 +174,8 @@ const SeasonTwoTabsSection = () => {
             </p>
           </div>
         </div>
-      </Tab>
-      <Tab title="DO POINTS = $SYMM?">
+      </TabsContent>
+      <TabsContent value="points">
         <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 left-1/2 -translate-x-1/2" />
 
@@ -179,25 +193,26 @@ const SeasonTwoTabsSection = () => {
             exploitative behavior
           </p>
         </div>
-      </Tab>
+      </TabsContent>
     </Tabs>
   )
 }
 
 const SeasonOneTabsSection = () => {
   return (
-    <Tabs
-      variant="underlined"
-      className=""
-      classNames={{
-        tab: "py-7 border-r first:border-l border-divider-color data-[selected=true]:text-primary data-[selected=true]:font-bold",
-        tabList: "gap-0 px-12 border-b border-divider",
-        cursor: "w-full bg-primary",
-      }}
-      fullWidth
-    >
-      <Tab title="OVERVIEW">
-        <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
+    <Tabs defaultValue="overview" className="w-full">
+      <div className="w-full overflow-auto">
+        <TabsList className="w-full min-w-max md:grid md:grid-cols-2">
+          <TabsTrigger className="flex-1 px-4" value="overview">
+            OVERVIEW
+          </TabsTrigger>
+          <TabsTrigger className="flex-1 px-4" value="total">
+            TOTAL POINTS AWARDED
+          </TabsTrigger>
+        </TabsList>
+      </div>
+      <TabsContent value="overview">
+        <div className="relative flex flex-col md:flex-row gap-8 items-center justify-evenly min-h-[512px] p-4">
           <Backlight className="absolute bottom-0 right-0" />
 
           <Image
@@ -205,6 +220,7 @@ const SeasonOneTabsSection = () => {
             height="351"
             src="/imgs/main/human-section.svg"
             alt="human vectors"
+            className="w-full max-w-[279px] h-auto"
           />
           <p className="max-w-[600px] text-informary leading-loose">
             The Season 1 points program was quietly launched on June 3, 2024,
@@ -220,8 +236,8 @@ const SeasonOneTabsSection = () => {
             Season 2 Points Program.
           </p>
         </div>
-      </Tab>
-      <Tab title="TOTAL POINTS AWARDED">
+      </TabsContent>
+      <TabsContent value="total">
         <div className="relative flex-wrap gap-y-5 flex items-center justify-evenly h-[512]">
           <Backlight className="absolute bottom-0 left-1/2" />
 
@@ -240,7 +256,7 @@ const SeasonOneTabsSection = () => {
             </p>
           </div>
         </div>
-      </Tab>
+      </TabsContent>
     </Tabs>
   )
 }
