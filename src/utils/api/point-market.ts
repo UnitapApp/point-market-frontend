@@ -52,3 +52,41 @@ export const fetchSymbolOrders = (symbol: string) => {
     })
     .then((res) => res.data)
 }
+
+export interface PaginationData {
+  currentPage: number
+  pageSize: number
+  totalRecords: number
+  totalPages: number
+}
+
+export interface ApiResponse {
+  data: any[]
+  pagination: PaginationData
+}
+
+export const fetchLeaderboardData = async (
+  season: number,
+  page: number,
+  pageSize: number,
+  sortBy?: string,
+  sortOrder?: "asc" | "desc",
+  filter?: string,
+): Promise<ApiResponse> => {
+  const params = new URLSearchParams({
+    page: page.toString(),
+    pageSize: pageSize.toString(),
+    ...(sortBy && { sortBy }),
+    ...(sortOrder && { sortOrder }),
+    ...(filter && {
+      filter,
+      filterField: "user",
+    }),
+  })
+
+  const response = await fetch(`/api/season${season}?${params}`)
+  if (!response.ok) {
+    throw new Error("Network response was not ok")
+  }
+  return response.json()
+}

@@ -10,14 +10,27 @@ import { useEffect, useState } from "react"
 import pointsData from "@/components/points.json"
 import axios from "axios"
 import { useQuery } from "@tanstack/react-query"
+import { fetchLeaderboardData } from "@/utils/api/point-market"
+import { useWalletAccount } from "@/utils/wallet"
+import LeaderboardSeason2Table from "./components/LeaderboardSeason2Table"
 
 export default function HomePage() {
   const [search, setSearch] = useState("")
   const [activeSeason, setActiveSeason] = useState(1)
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data: SeasonOneData, isLoading: seasonOneLoading } = useQuery({
     queryKey: ["points"],
     queryFn: () => axios.get("/api/points").then((res) => res.data),
+  })
+
+  const { address } = useWalletAccount()
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["leaderboard", address],
+    queryFn: () =>
+      fetchLeaderboardData(2, 1, 10, undefined, undefined, address),
+
+    enabled: () => !!address,
   })
 
   const [daysFilter, setDaysFilter] = useState(90)
@@ -39,7 +52,9 @@ export default function HomePage() {
       </div>
 
       <ConnectWalletSection
-        activeData={activeSeason === 2 ? (pointsData as any[]) : (data ?? [])}
+        activeData={
+          activeSeason === 2 ? (pointsData as any[]) : (data?.data ?? [])
+        }
       />
 
       <SeasonTableHeader
@@ -51,9 +66,8 @@ export default function HomePage() {
         setActiveSeason={setActiveSeason}
       />
       {activeSeason === 2 ? (
-        <LeaderboardTable
+        <LeaderboardSeason2Table
           key={2}
-          data={pointsData as any[]}
           search={search}
           setSearch={setSearch}
           daysToFilter={daysFilter}
@@ -61,13 +75,13 @@ export default function HomePage() {
         />
       ) : (
         <LeaderboardTable
-          key={(data ?? [])?.length}
-          data={data ?? []}
+          key={(SeasonOneData ?? [])?.length}
+          data={SeasonOneData ?? []}
           search={search}
           season={1}
           setSearch={setSearch}
           daysToFilter={daysFilter}
-          loading={isLoading}
+          loading={seasonOneLoading}
         />
       )}
       <LearnMoreSection />

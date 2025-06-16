@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-20 border-b md:absolute static top-0 left-0 right-0 text-sm backdrop-blur-sm border-[#847D7D4D] px-3 lg:px-20 flex items-center gap-10">
+      <header className="h-20 border-b sticky md:static z-10 top-0 left-0 right-0 text-sm backdrop-blur-sm border-[#847D7D4D] px-3 lg:px-20 flex items-center gap-10">
         <Link href="https://www.symmio.foundation/">
           <Image src="/Logo white.svg" alt="Symmio" width={170} height={40} />
         </Link>
@@ -61,7 +61,7 @@ export default function Header() {
       </header>
       <div
         className={cn(
-          "fixed bottom-0 flex items-center justify-center gap-8 flex-wrap transition-all left-0 right-0 top-20 bg-gray00/90 z-10",
+          "fixed bottom-0 flex items-center justify-center gap-8 flex-wrap transition-all left-0 right-0 top-20 bg-background/90 z-10",
           isHeaderOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",

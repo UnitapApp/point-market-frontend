@@ -1,5 +1,5 @@
-import { Skeleton } from "@/shared/shadcn/components/ui/skeleton";
-import { Table } from "@/shared/shadcn/components/ui/table";
+import { Skeleton } from "@/shared/shadcn/components/ui/skeleton"
+import { Table } from "@/shared/shadcn/components/ui/table"
 import {
   getCoreRowModel,
   getPaginationRowModel,
@@ -8,34 +8,38 @@ import {
   useReactTable,
   type PaginationState,
   type SortingState,
-} from "@tanstack/react-table";
-import { omit } from "lodash";
-import { useEffect, useImperativeHandle, useMemo, useState } from "react";
-import { defaultPaginationState } from "./constants";
-import { Pagination } from "./parts/pagination";
-import { Body } from "./parts/table-body";
-import { Header } from "./parts/table-header";
-import { TableContext } from "./table-context/table-context";
-import "./types";
+} from "@tanstack/react-table"
+import { omit } from "lodash"
+import { useEffect, useImperativeHandle, useMemo, useState } from "react"
+import { defaultPaginationState } from "./constants"
+import { Pagination } from "./parts/pagination"
+import { Body } from "./parts/table-body"
+import { Header } from "./parts/table-header"
+import { TableContext } from "./table-context/table-context"
+import "./types"
 
-export type TableParams = { pagination?: PaginationState; sorting?: SortingState };
+export type TableParams = {
+  pagination?: PaginationState
+  sorting?: SortingState
+}
 
 export type DataGridRef = {
-  resetSorting: VoidFunction;
-  resetPagination: VoidFunction;
-};
+  resetSorting: VoidFunction
+  resetPagination: VoidFunction
+}
 
-interface TableProps<TData> extends Omit<TableOptions<TData>, "getCoreRowModel"> {
-  loading?: boolean;
-  rowCount?: number;
-  serverSide?: boolean;
-  loadingRowsCount?: number;
-  disableSorting?: boolean;
-  disablePagination?: boolean;
-  tableParams?: TableParams;
-  ref?: React.Ref<DataGridRef>;
-  onParamsChange?: (params: TableParams) => void;
-  onRowClick?: (data: TData, event: React.MouseEvent) => void;
+interface TableProps<TData>
+  extends Omit<TableOptions<TData>, "getCoreRowModel"> {
+  loading?: boolean
+  rowCount?: number
+  serverSide?: boolean
+  loadingRowsCount?: number
+  disableSorting?: boolean
+  disablePagination?: boolean
+  tableParams?: TableParams
+  ref?: React.Ref<DataGridRef>
+  onParamsChange?: (params: TableParams) => void
+  onRowClick?: (data: TData, event: React.MouseEvent) => void
 }
 
 export function DataGrid<TData>(props: TableProps<TData>) {
@@ -52,26 +56,40 @@ export function DataGrid<TData>(props: TableProps<TData>) {
     loadingRowsCount = 5,
     onRowClick,
     onParamsChange,
-  } = props;
+  } = props
 
-  const [sorting, setSorting] = useState<SortingState>(tableParams?.sorting || []);
-  const [pagination, setPagination] = useState<PaginationState>(tableParams?.pagination || defaultPaginationState);
+  const [sorting, setSorting] = useState<SortingState>(
+    tableParams?.sorting || [],
+  )
+  const [pagination, setPagination] = useState<PaginationState>(
+    tableParams?.pagination || defaultPaginationState,
+  )
 
   useImperativeHandle(ref, () => ({
     resetSorting: () => setSorting([]),
     resetPagination: () => setPagination(defaultPaginationState),
-  }));
+  }))
 
   const tableColumns = useMemo(
     () =>
-      loading ? columns.map((column) => ({ ...column, cell: () => <Skeleton className="h-4 w-1/2" /> })) : columns,
+      loading
+        ? columns.map((column) => ({
+            ...column,
+            cell: () => <Skeleton className="h-4 w-1/2" />,
+          }))
+        : columns,
     [loading, columns],
-  );
+  )
 
   const tableData = useMemo(
-    () => (loading ? Array(disablePagination ? loadingRowsCount : pagination.pageSize).fill({}) : data),
+    () =>
+      loading
+        ? Array(
+            disablePagination ? loadingRowsCount : pagination.pageSize,
+          ).fill({})
+        : data,
     [loading, disablePagination, loadingRowsCount, pagination.pageSize, data],
-  );
+  )
 
   const table = useReactTable({
     data: tableData,
@@ -85,28 +103,51 @@ export function DataGrid<TData>(props: TableProps<TData>) {
     onSortingChange: setSorting,
     onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: serverSide || disableSorting ? undefined : getSortedRowModel(),
-    getPaginationRowModel: serverSide || disablePagination ? undefined : getPaginationRowModel(),
-  });
+    getSortedRowModel:
+      serverSide || disableSorting ? undefined : getSortedRowModel(),
+    getPaginationRowModel:
+      serverSide || disablePagination ? undefined : getPaginationRowModel(),
+  })
 
   useEffect(() => {
     if (!loading && !data.length && pagination.pageIndex > 0) {
-      setPagination({ pageIndex: 0, pageSize: 10 });
+      setPagination({ pageIndex: 0, pageSize: 10 })
     }
-  }, [data.length, loading, onParamsChange, pagination.pageIndex]);
+  }, [data.length, loading, onParamsChange, pagination.pageIndex])
 
   useEffect(() => {
-    const omitKeys = [];
-    if (disableSorting) omitKeys.push("sorting");
-    if (disablePagination) omitKeys.push("pagination");
+    const omitKeys = []
+    if (disableSorting) omitKeys.push("sorting")
+    if (disablePagination) omitKeys.push("pagination")
 
-    const params = omit({ sorting, pagination }, omitKeys);
+    const params = omit({ sorting, pagination }, omitKeys)
 
-    onParamsChange?.(params);
-  }, [disablePagination, disableSorting, onParamsChange, pagination, sorting]);
+    // Only call onParamsChange if the values are actually different
+    const isParamsDifferent =
+      JSON.stringify(params) !== JSON.stringify(tableParams)
+    if (isParamsDifferent) {
+      onParamsChange?.(params)
+    }
+  }, [
+    disablePagination,
+    disableSorting,
+    onParamsChange,
+    pagination,
+    sorting,
+    tableParams,
+  ])
 
   return (
-    <TableContext.Provider value={{ table, loading, serverSide, disablePagination, disableSorting, onRowClick }}>
+    <TableContext.Provider
+      value={{
+        table,
+        loading,
+        serverSide,
+        disablePagination,
+        disableSorting,
+        onRowClick,
+      }}
+    >
       <Table>
         <Header />
         <Body />
@@ -114,5 +155,5 @@ export function DataGrid<TData>(props: TableProps<TData>) {
 
       <Pagination />
     </TableContext.Provider>
-  );
+  )
 }
