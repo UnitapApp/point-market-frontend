@@ -6,7 +6,7 @@ import { useWalletAccount } from "@/utils/wallet"
 import { FaAngleDown } from "react-icons/fa6"
 import { LuCrown, LuLogOut } from "react-icons/lu"
 import { Address, isAddressEqual } from "viem"
-import { FC, useState } from "react"
+import { FC, useState, useMemo, memo, useEffect } from "react"
 import { useDisconnect } from "wagmi"
 import {
   Popover,
@@ -16,8 +16,29 @@ import {
 
 export type ActiveDataProps = { activeData: any[] }
 
-export default function ConnectWalletSection({ activeData }: ActiveDataProps) {
+export function ConnectWalletSection({ activeData }: ActiveDataProps) {
   const { address } = useWalletAccount()
+
+  const [userData, setUserdata] = useState(null as null | any)
+
+  useEffect(() => {
+    if (!address) {
+      setUserdata(null)
+      return
+    }
+
+    setTimeout(() => {
+      const sortedData = activeData
+        .sort((a, b) => b.Point - a.Point)
+        .map((item, key) => ({ ...item, rank: key + 1, id: item.id ?? key }))
+
+      setUserdata(
+        sortedData.find((item) =>
+          isAddressEqual(address!, item.user as Address),
+        ),
+      )
+    })
+  }, [activeData, address])
 
   if (!address) {
     return (
@@ -39,8 +60,8 @@ export default function ConnectWalletSection({ activeData }: ActiveDataProps) {
         <h3 className="text-3xl font-[500]">Leaderboard</h3>
       </div>
       <WalletCard />
-      <PointsCard activeData={activeData} />
-      <RankingCard activeData={activeData} />
+      <PointsCard userData={userData} />
+      <RankingCard userData={userData} />
     </section>
   )
 }
@@ -98,46 +119,31 @@ const WalletCard = () => {
   )
 }
 
-const PointsCard: FC<ActiveDataProps> = ({ activeData }) => {
-  const { address } = useWalletAccount()
-
-  const userPoints = activeData.find((item) =>
-    isAddressEqual(address!, item.user as Address),
-  )
-
+const PointsCard: FC<{ userData: any | null }> = ({ userData }) => {
   return (
     <div className="flex border-l border-divider-color relative px-12 h-full items-center gap-4">
       <div className="bg-no-repeat bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-0 right-0 -translate-x-10 h-60"></div>{" "}
       <div>
         <p className="text-informary">POINTS</p>
-        <h3 className="text-2xl mt-2 font-[500]">{userPoints?.Point ?? "-"}</h3>
+        <h3 className="text-2xl mt-2 font-[500]">{userData?.Point ?? "-"}</h3>
       </div>
       <div className="ml-8"></div>
-      {/* <div className="w-8 h-8 ml-10 bg-[#ffffff12] rounded-full grid place-items-center">
-        <FaAngleDown />
-      </div> */}
     </div>
   )
 }
 
-const RankingCard: FC<ActiveDataProps> = ({ activeData }) => {
-  const { address } = useWalletAccount()
-
-  const user = activeData
-    .sort((a, b) => b.Point - a.Point)
-    .map((item, key) => ({ ...item, rank: key + 1, id: key }))
-    .find((item) => isAddressEqual(address!, item.user as Address))
-
+const RankingCard: FC<{ userData: any | null }> = ({ userData }) => {
   return (
     <div className="flex border-l border-divider-color border-r px-12 h-full items-center gap-4">
       <div>
         <p className="text-informary">RANK</p>
-        <h3 className="text-2xl mt-2 font-[500]">{user?.rank ?? "-"}</h3>
+        <h3 className="text-2xl mt-2 font-[500]">{userData?.rank ?? "-"}</h3>
       </div>
       <div className="ml-8"></div>
-      {/* <div className="w-8 h-8 ml-10 bg-[#ffffff12] rounded-full grid place-items-center">
-        <FaAngleDown />
-      </div> */}
     </div>
   )
 }
+
+const ConnectWalletSectionMemo = memo(ConnectWalletSection)
+
+export default ConnectWalletSectionMemo

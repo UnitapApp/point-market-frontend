@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import React, { memo, useEffect, useMemo, useState } from "react"
 import { DataGrid, TableParams } from "@/components/data-grid"
 import Image from "next/image"
 import { CiUser, CiWallet } from "react-icons/ci"
@@ -10,7 +10,7 @@ import { numberWithCommas } from "@/utils"
 import { useQuery } from "@tanstack/react-query"
 import { fetchLeaderboardData } from "@/utils/api/point-market"
 
-export default function LeaderboardSeason2Table({
+export function LeaderboardSeason2Table({
   search,
   setSearch,
   daysToFilter,
@@ -126,11 +126,8 @@ export default function LeaderboardSeason2Table({
   }
 
   const handleParamsChange = (params: TableParams) => {
-    console.log("CHANGING", params)
     setTableParams(params)
   }
-
-  console.log(tableParams)
 
   return (
     <DataGrid
@@ -144,3 +141,7 @@ export default function LeaderboardSeason2Table({
     />
   )
 }
+
+const LeaderboardSeason2TableMemo = memo(LeaderboardSeason2Table)
+
+export default LeaderboardSeason2TableMemo

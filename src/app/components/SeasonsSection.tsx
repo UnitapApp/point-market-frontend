@@ -38,7 +38,10 @@ export default function SeasonsSection() {
           className="border-none"
         >
           <AccordionTrigger>
-            <SeasonSection season="Season 2" text="November 4 - June 4 2025 " />
+            <SeasonSection
+              season="Season 2"
+              text="November 4 - September 16 2025"
+            />
           </AccordionTrigger>
           <AccordionContent className="bg-transparent">
             <SeasonTwoTabsSection />
@@ -105,13 +108,11 @@ const SeasonTwoTabsSection = () => {
             className="w-full max-w-[279px] h-auto"
           />
           <p className="max-w-[600px] text-informary leading-loose">
-            Starting on November 4, 2024, Season 2 will continue with daily
-            rewards of <strong className="text-white">33,962</strong> points to
-            drive growth and engagement across the Symmio ecosystem and will go
-            on for 7 months or till{" "}
-            <strong className="text-white">$150,000,000</strong> OI, whatever
-            happens earlier, Season 2 will also continue to run after TGE
-            happened. 
+            Starting on November 4, 2024, Season 2 will continue to drive growth
+            and engagement across the Symmio ecosystem and will run for{" "}
+            <strong className="text-white">11 months</strong> or until
+            <strong className="text-white">$150,000,000</strong> in open
+            interest is reached—whichever comes first.
           </p>
         </div>
       </TabsContent>
