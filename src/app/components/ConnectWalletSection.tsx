@@ -30,11 +30,15 @@ export function ConnectWalletSection({ activeData }: ActiveDataProps) {
     setTimeout(() => {
       const sortedData = activeData
         .sort((a, b) => b.Point - a.Point)
-        .map((item, key) => ({ ...item, rank: key + 1, id: item.id ?? key }))
+        .map((item, key) => ({
+          ...item,
+          rank: key + 1,
+          id: item.id ?? key + 1,
+        }))
 
       setUserdata(
         sortedData.find((item) =>
-          isAddressEqual(address!, item.user as Address),
+          isAddressEqual(address, item.user as Address),
         ),
       )
     })
@@ -121,7 +125,7 @@ const WalletCard = () => {
 
 const PointsCard: FC<{ userData: any | null }> = ({ userData }) => {
   return (
-    <div className="flex border-l border-divider-color relative px-12 h-full items-center gap-4">
+    <div className="flex border-l border-divider-color relative px-5 h-full items-center gap-4">
       <div className="bg-no-repeat bg-[url('/imgs/main/section-bg.svg')] absolute -top-9 left-0 right-0 -translate-x-10 h-60"></div>{" "}
       <div>
         <p className="text-informary">POINTS</p>
@@ -137,7 +141,7 @@ const RankingCard: FC<{ userData: any | null }> = ({ userData }) => {
     <div className="flex border-l border-divider-color border-r px-12 h-full items-center gap-4">
       <div>
         <p className="text-informary">RANK</p>
-        <h3 className="text-2xl mt-2 font-[500]">{userData?.rank ?? "-"}</h3>
+        <h3 className="text-2xl mt-2 font-[500]">{userData?.id ?? "-"}</h3>
       </div>
       <div className="ml-8"></div>
     </div>
