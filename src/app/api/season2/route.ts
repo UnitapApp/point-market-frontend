@@ -44,10 +44,15 @@ export async function GET(req: Request) {
       .pipe(parse({ columns: true, skip_empty_lines: true }))
 
     for await (const record of parser) {
-      // Add row index as id
-      records.push({ ...record, id: totalRecords + 1 })
+      records.push({ ...record })
       totalRecords++
     }
+
+    // Sort by Point column (descending) before any other operation
+    records.sort((a, b) => Number(b.Point) - Number(a.Point))
+
+    // Assign id after sorting
+    records = records.map((record, idx) => ({ ...record, id: idx + 1 }))
 
     // Apply filtering if specified
     if (filter && filterField) {
@@ -86,7 +91,6 @@ export async function GET(req: Request) {
     }
 
     const start = (pageNum - 1) * pageSizeNum
-    console.log({ start, end: start + pageSizeNum })
     const paginatedRecords = records.slice(start, start + pageSizeNum)
 
     return NextResponse.json({
