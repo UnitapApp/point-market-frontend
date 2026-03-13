@@ -3,7 +3,12 @@ import Image from "next/image"
 export default function LearnMoreSection() {
   return (
     <div className="h-[512px] flex flex-col justify-center items-center bg-[url('/imgs/main/learn-more-bg.svg')]">
-      <Image alt="Symmio" width={30} height={30} src="/imgs/symmio.svg" />
+      <Image
+        alt="Symmio"
+        width={170}
+        height={39}
+        src="/imgs/logo/SymmioFoundation.svg"
+      />
 
       <h3 className="text-4xl font-bold mt-10">
         Learn more about Symmio <span className="text-primary">Points </span>

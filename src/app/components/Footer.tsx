@@ -1,7 +1,8 @@
+import Image from "next/image"
 import Link from "next/link"
 import { BsTwitterX } from "react-icons/bs"
 import { FaDiscord } from "react-icons/fa6"
-import { PiMediumLogoFill } from "react-icons/pi"
+// import { PiMediumLogoFill } from "react-icons/pi"
 import { SiGitbook } from "react-icons/si"
 
 export default function Footer() {
@@ -15,12 +16,13 @@ export default function Footer() {
                 href="https://www.symmio.foundation/"
                 className="navbar-logo-wrap-copy w-inline-block"
               >
-                <div className="">
-                  <img
-                    src="https://cdn.prod.website-files.com/673b709e9411d4683cbf9172/673dfee63ebb2ee7f1ff3f07_Logo%20white.svg"
-                    loading="lazy"
-                    alt=""
+                <div className="px-2">
+                  <Image
                     className="logo-image-footer"
+                    src="/imgs/logo/SymmioFoundation.svg"
+                    alt="Symmio"
+                    width={255}
+                    height={60}
                   />
                 </div>
               </a>
@@ -28,12 +30,12 @@ export default function Footer() {
                 <Link target="_blank" href="https://docs.symmio.foundation/">
                   <SiGitbook />
                 </Link>
-                <Link
+                {/*<Link
                   target="_blank"
                   href="https://medium.com/symmio-publication"
                 >
                   <PiMediumLogoFill size={20} />
-                </Link>
+                </Link>*/}
                 <Link target="_blank" href="https://twitter.com/symm_io">
                   <BsTwitterX size={18} />
                 </Link>
@@ -83,7 +85,7 @@ export default function Footer() {
                   />
                 </a>
                 <a
-                  href="https://analytics.symm.io/"
+                  href="https://symmscan.com/"
                   target="_blank"
                   className="gap-2 brightness-[300%] hover:text-primary cursor-pointer no-underline transition-all duration-200 flex"
                 >
@@ -122,7 +124,7 @@ export default function Footer() {
                   <div className="">Start Trading</div>
                 </a>
                 <a
-                  href="https://app.youform.com/forms/ljshiwqv"
+                  href="https://form.typeform.com/to/pt1D0S1o"
                   target="_blank"
                   className="gap-2 brightness-[300%] hover:text-primary cursor-pointer no-underline transition-all duration-200 flex"
                 >

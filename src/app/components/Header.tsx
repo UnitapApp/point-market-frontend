@@ -5,7 +5,7 @@ import Link from "next/link"
 import { FaRegFileLines, FaDiscord, FaBars } from "react-icons/fa6"
 import { GoArrowUpRight } from "react-icons/go"
 import { SiGitbook } from "react-icons/si"
-import { PiMediumLogoFill } from "react-icons/pi"
+// import { PiMediumLogoFill } from "react-icons/pi"
 import { BsMenuButtonFill, BsTwitterX } from "react-icons/bs"
 import { useState } from "react"
 import { cn } from "@nextui-org/react"
@@ -25,7 +25,12 @@ export default function Header() {
     <>
       <header className="h-20 border-b sticky md:static z-10 top-0 left-0 right-0 text-sm backdrop-blur-sm border-[#847D7D4D] px-3 lg:px-20 flex items-center gap-10">
         <Link href="https://www.symmio.foundation/">
-          <Image src="/Logo white.svg" alt="Symmio" width={170} height={40} />
+          <Image
+            src="/imgs/logo/SymmioFoundation.svg"
+            alt="Symmio"
+            width={170}
+            height={40}
+          />
         </Link>
 
         <div className="block ml-auto lg:hidden">
@@ -39,9 +44,18 @@ export default function Header() {
             title="Staking"
           />
           <HeaderLink
+            href="https://app.symmio.foundation/vesting"
+            title="Vesting"
+          />
+          <HeaderLink
+            href="https://docs.symm.io/legal-and-brand-and-security/terms-of-service-and-licensing/terms-of-service"
+            title="Terms of service"
+          />
+          <HeaderLink href="https://linktr.ee/SYMM.IO" title="Quick Links" />
+          {/*<HeaderLink
             href="https://docs.symmio.foundation/token-related/tokenomics/symmio-points"
             title="Points"
-          />
+          />*/}
         </div>
 
         {/* <div className="ml-14 text-gray100 hidden lg:flex items-center gap-8">
@@ -74,13 +88,13 @@ export default function Header() {
         >
           <SiGitbook />
         </Link>
-        <Link
+        {/*<Link
           className="hover:text-white transition-colors"
           target="_blank"
           href="https://medium.com/symmio-publication"
         >
           <PiMediumLogoFill size={22} />
-        </Link>
+        </Link>*/}
         <Link
           className="hover:text-white transition-colors"
           target="_blank"
@@ -95,6 +109,8 @@ export default function Header() {
         >
           <FaDiscord size={22} />
         </Link>
+
+        <span></span>
         <div className="flex gap-4 items-center">
           <Link
             href="https://github.com/SYMM-IO/docs/blob/main/Whitepaper/SYMMIO_paper_0_8.pdf"
