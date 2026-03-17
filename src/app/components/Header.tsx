@@ -38,7 +38,7 @@ export default function Header() {
         </div>
 
         <div className="ml-0 lg:ml-auto hidden lg:flex items-center gap-10">
-          <HeaderLink href="https://docs.symmio.foundation/" title="Docs" />
+          {/*<HeaderLink href="https://docs.symmio.foundation/" title="Docs" />*/}
           <HeaderLink
             href="https://app.symmio.foundation/staking"
             title="Staking"
