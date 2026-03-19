@@ -47,6 +47,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" dir="ltr" className="dark">
+      <head>
+        <link href="https://cdn.prod.website-files.com/6737463c553f61802ae4a090/69b40783a67558456fee25b3_FavIcon-BG.svg" rel="shortcut icon" type="image/x-icon"/>
+      </head>
       <body className={`dark:bg-body dark:text-white ${archivoFont.className}`}>
         <Providers initialState={initialState}>
           <UnitapProvider>
