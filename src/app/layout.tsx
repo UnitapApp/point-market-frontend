@@ -32,7 +32,7 @@ const archivoFont = Archivo({
 export const metadata: Metadata = {
   title: "Symmio | Points Program",
   description: "Symmio Points Program",
-  icons: ["/favicon.svg"],
+  icons: ["/favicon.ico"],
 }
 
 export default async function RootLayout({
